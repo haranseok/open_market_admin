@@ -1,0 +1,8 @@
+RewriteEngine On
+RewriteBase /
+RewriteRule ^index\.html$ - [L]
+RewriteCond %{HTTP:X-Forwarded-For} (211.171.13.210|211.171.13.211) [OR]
+RewriteCond %{REMOTE_ADDR} (211.171.13.210|211.171.13.211)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.html [L]
