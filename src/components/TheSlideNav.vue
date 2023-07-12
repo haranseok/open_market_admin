@@ -30,8 +30,13 @@
             prepend-icon="mdi-gift"
           ></v-list-item>
         </template>
-        <v-list-item title="상품리스트" value="product-list"></v-list-item>
-        <v-list-item title="상품 재고관리" value="inventory"></v-list-item>
+        <v-list-item
+          v-for="([title, value], i) in products"
+          :key="i"
+          :title="title"
+          :value="value"
+        >
+        </v-list-item>
       </v-list-group>
       <v-list-group value="order">
         <template v-slot:activator="{ props }">
@@ -41,8 +46,13 @@
             prepend-icon="mdi-cart"
           ></v-list-item>
         </template>
-        <v-list-item title="주문접수" value="order-receipt"></v-list-item>
-        <v-list-item title="결제대기" value="payment"></v-list-item>
+        <v-list-item
+          v-for="([title, value], i) in orders"
+          :key="i"
+          :title="title"
+          :value="value"
+        >
+        </v-list-item>
       </v-list-group>
       <v-list-item
         prepend-icon="mdi-account-group-outline"
@@ -82,10 +92,13 @@
             prepend-icon="mdi-account-wrench-outline"
           ></v-list-item>
         </template>
-        <v-list-item title="이벤트 관리" value="event"></v-list-item>
-        <v-list-item title="배너 관리" value="banner"></v-list-item>
-        <v-list-item title="이용약관 관리" value="terms"></v-list-item>
-        <v-list-item title="개인정보처리방침" value="privacy"></v-list-item>
+        <v-list-item
+          v-for="([title, value], i) in operate"
+          :key="i"
+          :title="title"
+          :value="value"
+        >
+        </v-list-item>
       </v-list-group>
       <v-list-group value="service">
         <template v-slot:activator="{ props }">
@@ -96,23 +109,13 @@
           ></v-list-item>
         </template>
         <v-list-item
-          title="카테고리(게시판) 관리"
-          value="category-board"
-        ></v-list-item>
-        <v-list-item
-          title="카테고리(상품) 설정"
-          value="category-product"
-        ></v-list-item>
-        <v-list-item title="적립금 설정" value="reserves"></v-list-item>
-        <v-list-item title="오픈마켓 리스트" value="privacy"></v-list-item>
-        <v-list-item title="무통장 계좌설정" value="market-list"></v-list-item>
-        <v-list-item title="제품 창고관리" value="storage"></v-list-item>
+          v-for="([title, value], i) in service"
+          :key="i"
+          :title="title"
+          :value="value"
+        >
+        </v-list-item>
       </v-list-group>
-      <v-list-item
-        prepend-icon="mdi-cog"
-        title="환경 설정"
-        value="preferences"
-      ></v-list-item>
       <v-list-group value="preferences">
         <template v-slot:activator="{ props }">
           <v-list-item
@@ -121,11 +124,22 @@
             title="환경 설정"
           ></v-list-item>
         </template>
-        <v-list-item title="메뉴 설정" value="menu"></v-list-item>
-        <v-list-item title="기본 설정" value="defualt"></v-list-item>
-        <v-list-item title="관리자 회원" value="admin-user"></v-list-item>
+        <v-list-item
+          v-for="([title, value], i) in preferences"
+          :key="i"
+          :title="title"
+          :value="value"
+        ></v-list-item>
       </v-list-group>
     </v-list>
+    <template v-slot:append>
+      <div class="pa-2">
+        <v-btn block>
+          <v-icon v-if="navDrawerStore.rail === true">mdi-export</v-icon>
+          <p v-else>logout</p>
+        </v-btn>
+      </div>
+    </template>
   </v-navigation-drawer>
 </template>
 
@@ -133,6 +147,33 @@
 import { ref } from "vue";
 import { useNavDrawerStore } from "@/stores/NavDrawerStore";
 const navDrawerStore = useNavDrawerStore();
+const products = ref([
+  ["상품 리스트", "product-list"],
+  ["상품 재고관리", "inventory"],
+]);
+const orders = ref([
+  ["주문접수", "order-receipt"],
+  ["결제대기", "payment"],
+]);
+const operate = ref([
+  ["이벤트 관리", "event"],
+  ["배너 관리", "banner"],
+  ["이용약관 관리", "terms"],
+  ["개인정보처리방침", "privarcy"],
+]);
+const service = ref([
+  ["카테고리(게시판) 관리", "category-board"],
+  ["카테고리(상품) 관리", "category-product"],
+  ["적립금 설정", "reserves"],
+  ["오픈마켓 리스트", "market-list"],
+  ["무통장 계좌설정", "account-setup"],
+  ["제품 창고 관리", "storage"],
+]);
+const preferences = ref([
+  ["메뉴 설정", "menu"],
+  ["기본 설정", "defualt"],
+  ["관리자 회원", "admim-user"],
+]);
 </script>
 
 <style lang="scss" scoped>
