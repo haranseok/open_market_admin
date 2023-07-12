@@ -8,8 +8,8 @@
 </template>
 
 <script lang="ts" setup>
-import { useNavDrawerStore } from "@/stores/NavDrawerStore.ts";
-import Search from "@/components/item/Search.vue";
+import { useNavDrawerStore } from "@/stores/NavDrawerStore";
+import Search from "@/components/items/Search.vue";
 const navDrawer = useNavDrawerStore();
 </script>
 

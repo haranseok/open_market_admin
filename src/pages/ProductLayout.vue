@@ -1,5 +1,5 @@
 <template>
-  <v-main>home</v-main>
+  <div>상품관리</div>
 </template>
 
 <script lang="ts" setup></script>
