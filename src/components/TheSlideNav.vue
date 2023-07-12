@@ -21,6 +21,7 @@
         prepend-icon="mdi-home-city"
         title="메인화면"
         value="home"
+        @click="router.push('/main')"
       ></v-list-item>
       <v-list-group value="product">
         <template v-slot:activator="{ props }">
@@ -31,10 +32,11 @@
           ></v-list-item>
         </template>
         <v-list-item
-          v-for="([title, value], i) in products"
+          v-for="([title, value, link], i) in products"
           :key="i"
           :title="title"
           :value="value"
+          @click="routerLink(link)"
         >
         </v-list-item>
       </v-list-group>
@@ -145,10 +147,13 @@
 
 <script lang="ts" setup>
 import { ref } from "vue";
+import { useRouter } from "vue-router";
 import { useNavDrawerStore } from "@/stores/NavDrawerStore";
+
+const router = useRouter();
 const navDrawerStore = useNavDrawerStore();
 const products = ref([
-  ["상품 리스트", "product-list"],
+  ["상품 리스트", "product-list", "product"],
   ["상품 재고관리", "inventory"],
 ]);
 const orders = ref([
@@ -174,6 +179,10 @@ const preferences = ref([
   ["기본 설정", "defualt"],
   ["관리자 회원", "admim-user"],
 ]);
+
+const routerLink = (link: string) => {
+  router.push(link);
+};
 </script>
 
 <style lang="scss" scoped>

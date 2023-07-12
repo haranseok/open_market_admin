@@ -39,6 +39,10 @@ ul {
   margin: 0 auto;
 }
 
+.flex {
+  display: flex;
+}
+
 .jcc {
   display: flex;
   justify-content: center;
@@ -50,6 +54,10 @@ ul {
   justify-content: space-between;
 }
 
+.jcsa {
+  display: flex;
+  justify-content: space-around;
+}
 /** popup base bg **/
 
 .popup_bg {
