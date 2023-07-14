@@ -27,6 +27,7 @@
         </div>
         <v-btn color="rgb(40, 53, 147)" @click="doSearch">검색</v-btn>
       </div>
+      <router-view></router-view>
     </article>
   </v-main>
 </template>
@@ -35,10 +36,10 @@
 import { ref, watchEffect } from "vue";
 import TheBreadCrumbs from "@/components/TheBreadCrumbs.vue";
 import CommonInput from "@/components/items/CommonInput.vue";
-const text = ref("");
+
 const title = ref("상품관리");
-const productName = ref("");
-const productCode = ref("");
+const goodsName = ref("");
+const goodsCode = ref("");
 const startData = ref("");
 const endData = ref("");
 const items = ref([
@@ -50,14 +51,14 @@ const items = ref([
   {
     title: "상품리스트",
     disabled: true,
-    href: "product",
+    href: "goods",
   },
 ]);
 const getName = (e: string) => {
-  productName.value = e;
+  goodsName.value = e;
 };
 const getCode = (e: string) => {
-  productCode.value = e;
+  goodsCode.value = e;
 };
 const getStartDate = (e: string) => {
   startData.value = e;
@@ -67,13 +68,11 @@ const getEndDate = (e: string) => {
 };
 const doSearch = () => {
   let searchData = {
-    name: productName.value,
-    code: productCode.value,
+    name: goodsName.value,
+    code: goodsCode.value,
     start: startData.value,
     end: endData.value,
   };
-
-  console.log(searchData);
 };
 </script>
 

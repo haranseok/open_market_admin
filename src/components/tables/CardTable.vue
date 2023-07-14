@@ -2,7 +2,7 @@
   <table>
     <thead>
       <tr>
-        <td colspan="2">{{ props.title }}</td>
+        <th colspan="2">{{ props.title }}</th>
       </tr>
     </thead>
     <tbody>
@@ -27,7 +27,7 @@ table {
     text-align: center;
     background: #f5f5f5;
     tr {
-      td {
+      th {
         font-weight: bold;
         padding: 2%;
       }

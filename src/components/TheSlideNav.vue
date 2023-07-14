@@ -23,7 +23,7 @@
         value="home"
         @click="router.push('/main')"
       ></v-list-item>
-      <v-list-group value="product">
+      <v-list-group value="goods">
         <template v-slot:activator="{ props }">
           <v-list-item
             v-bind="props"
@@ -32,7 +32,7 @@
           ></v-list-item>
         </template>
         <v-list-item
-          v-for="([title, value, link], i) in products"
+          v-for="([title, value, link], i) in goods"
           :key="i"
           :title="title"
           :value="value"
@@ -149,12 +149,11 @@
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 import { useNavDrawerStore } from "@/stores/NavDrawerStore";
-
 const router = useRouter();
 const navDrawerStore = useNavDrawerStore();
-const products = ref([
-  ["상품 리스트", "product-list", "product"],
-  ["상품 재고관리", "inventory"],
+const goods = ref([
+  ["상품 리스트", "goods-list", "goods/list"],
+  ["상품 재고관리", "inventory", "inventory"],
 ]);
 const orders = ref([
   ["주문접수", "order-receipt"],
@@ -168,7 +167,7 @@ const operate = ref([
 ]);
 const service = ref([
   ["카테고리(게시판) 관리", "category-board"],
-  ["카테고리(상품) 관리", "category-product"],
+  ["카테고리(상품) 관리", "category-goods"],
   ["적립금 설정", "reserves"],
   ["오픈마켓 리스트", "market-list"],
   ["무통장 계좌설정", "account-setup"],
