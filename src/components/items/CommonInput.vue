@@ -1,17 +1,23 @@
 <template>
   <div class="input-wrap">
     <input
-      :type="props.type"
-      :placeholder="props.placeholder"
+      :type="type"
+      :placeholder="placeholder"
       @input="onInput"
-      :data-placeholder="props.dataPlaceholder"
+      :data-placeholder="dataPlaceholder"
       required
     />
   </div>
 </template>
 
 <script lang="ts" setup>
-const props = defineProps(["type", "placeholder", "dataPlaceholder"]);
+interface Input {
+  type: string;
+  placeholder?: string;
+  dataPlaceholder?: string;
+}
+
+const { type, placeholder, dataPlaceholder } = defineProps<Input>();
 const emit = defineEmits(["changeInput"]);
 
 const onInput = (e: any) => {
