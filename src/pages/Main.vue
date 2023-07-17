@@ -9,30 +9,30 @@
       <v-card class="table-wrap">
         <v-col cols="3">
           <CardTable
-            :title="'주문 처리'"
-            :th="table_order.th"
-            :td="table_order.td"
+            :tableTitle="'주문 처리'"
+            :headers="table_order.th"
+            :items="table_order.td"
           />
         </v-col>
         <v-col cols="3">
           <CardTable
-            :title="'반품 관리'"
-            :th="tableReturn.th"
-            :td="tableReturn.td"
+            :tableTitle="'반품 관리'"
+            :headers="tableReturn.th"
+            :items="tableReturn.td"
           />
         </v-col>
         <v-col cols="3">
           <CardTable
-            :title="'환불 관리'"
-            :th="tableRefund.th"
-            :td="tableRefund.td"
+            :tableTitle="'환불 관리'"
+            :headers="tableRefund.th"
+            :items="tableRefund.td"
           />
         </v-col>
         <v-col cols="3">
           <CardTable
-            :title="'교환 관리'"
-            :th="tableExchange.th"
-            :td="tableExchange.td"
+            :tableTitle="'교환 관리'"
+            :headers="tableExchange.th"
+            :items="tableExchange.td"
           />
         </v-col>
       </v-card>
