@@ -56,11 +56,22 @@
         >
         </v-list-item>
       </v-list-group>
-      <v-list-item
-        prepend-icon="mdi-account-group-outline"
-        title="회원관리"
-        value="users"
-      ></v-list-item>
+      <v-list-group value="users">
+        <template v-slot:activator="{ props }">
+          <v-list-item
+            v-bind="props"
+            title="회원관리"
+            prepend-icon="mdi-account-group-outline"
+          ></v-list-item>
+        </template>
+        <v-list-item
+          v-for="([title, value], i) in users"
+          :key="i"
+          :title="title"
+          :value="value"
+        >
+        </v-list-item>
+      </v-list-group>
       <v-list-item
         prepend-icon="mdi-domain"
         title="공급 업체관리"
@@ -152,12 +163,17 @@ import { useNavDrawerStore } from "@/stores/NavDrawerStore";
 const router = useRouter();
 const navDrawerStore = useNavDrawerStore();
 const goods = ref([
-  ["상품 리스트", "goods-list", "goods/list"],
+  ["상품 리스트", "goods_list", "goods/list"],
   ["상품 재고관리", "inventory", "inventory"],
 ]);
 const orders = ref([
-  ["주문접수", "order-receipt"],
+  ["주문접수", "order_receipt"],
   ["결제대기", "payment"],
+]);
+const users = ref([
+  ["일반 회원", "general_user"],
+  ["판매자 회원", "seller_user"],
+  ["관리자 회원", "admin_user"],
 ]);
 const operate = ref([
   ["이벤트 관리", "event"],
@@ -175,8 +191,7 @@ const service = ref([
 ]);
 const preferences = ref([
   ["메뉴 설정", "menu"],
-  ["기본 설정", "defualt"],
-  ["관리자 회원", "admim-user"],
+  ["기본 설정", "default"],
 ]);
 
 const routerLink = (link: string) => {

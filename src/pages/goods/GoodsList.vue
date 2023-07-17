@@ -1,15 +1,15 @@
 <template>
   <div class="container">
-    <h4>총 &lpar; 2건 &rpar;</h4>
+    <h4>총 &lpar; {{ items.length }} 건 &rpar;</h4>
     <v-card>
-      <Table :th="th" :tr="tr" />
+      <Table :headers="th" :items="items" />
     </v-card>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { ref } from "vue";
-import Table from "@/components/tables/DefualtTable.vue";
+import Table from "@/components/tables/DefaultTable.vue";
 
 const th = ref([
   "상품 id",
@@ -19,7 +19,6 @@ const th = ref([
   "상품 명",
   "상태",
   "가격",
-  "배송비",
   "옵션",
   "이미지 관리",
   "등록일자",
@@ -27,22 +26,31 @@ const th = ref([
   "삭제",
 ]);
 
-const tr = ref([
-  [
-    "123450s",
-    "a",
-    "img",
-    "홍길동",
-    "작품",
-    "노출",
-    "30,000원",
-    "3,000원",
-    "1",
-    "관리",
-    "2023-07-14",
-    "mdi-pencil-circle",
-    "mdi-delete-circle",
-  ],
+const items = ref([
+  {
+    id: "a12345",
+    store: "aStore",
+    img: "",
+    name: "홍길동",
+    goodsName: "a 상품",
+    status: "1",
+    price: "10,000원",
+    option: "1",
+    imgStatus: "2",
+    createDate: "2023-07-17",
+  },
+  {
+    id: "a1234567",
+    store: "bStore",
+    img: "",
+    name: "춘향",
+    goodsName: "b 상품",
+    status: "1",
+    price: "15,000원",
+    option: "1",
+    imgStatus: "0",
+    createDate: "2023-07-17",
+  },
 ]);
 </script>
 
