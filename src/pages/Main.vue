@@ -36,9 +36,6 @@
           />
         </v-col>
       </v-card>
-      <v-card>
-        <Calendar />
-      </v-card>
     </div>
   </v-main>
 </template>
@@ -48,7 +45,7 @@ import { ref } from "vue";
 import TheBreadCrumbs from "@/components/TheBreadCrumbs.vue";
 import LineChart from "@/components/charts/LineChart.vue";
 import CardTable from "@/components/tables/CardTable.vue";
-import Calendar from "@/components/items/Calendar.vue";
+
 const title = ref("메인화면");
 const items = ref([
   {
