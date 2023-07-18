@@ -2,15 +2,36 @@
   <div class="container">
     <h4>총 &lpar; {{ items.length }} 건 &rpar;</h4>
     <v-card>
-      <Table :headers="th" :items="items" />
+      <!-- <Table :headers="th" :items="items" /> -->
+      <BaseTable :headers="th" :list="items">
+        <template #list="{ row }">
+          <td>{{ row.id }}</td>
+          <td>{{ row.store }}</td>
+          <td>
+            <img
+              src="@/assets/images/exclude.png"
+              alt=""
+              v-if="row.img === ''"
+            />
+            <img :src="row.img" alt="" v-else />
+          </td>
+          <td>{{ row.name }}</td>
+          <td>{{ row.goodsName }}</td>
+          <td>{{ row.status }}</td>
+          <td>{{ row.price }}</td>
+          <td>{{ row.option }}</td>
+          <td>{{ row.imgStatus }}</td>
+          <td>{{ row.createDate }}</td>
+        </template>
+      </BaseTable>
     </v-card>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { ref } from "vue";
-import Table from "@/components/tables/DefaultTable.vue";
-
+// import Table from "@/components/tables/DefaultTable.vue";
+import BaseTable from "@/components/tables/BaseTable.vue";
 const th = ref([
   "상품 id",
   "store",
@@ -51,6 +72,18 @@ const items = ref([
     imgStatus: "0",
     createDate: "2023-07-17",
   },
+  {
+    id: "c1234567",
+    store: "cStore",
+    img: "",
+    name: "아무개",
+    goodsName: "c 상품",
+    status: "1",
+    price: "15,000원",
+    option: "1",
+    imgStatus: "0",
+    createDate: "2023-07-17",
+  },
 ]);
 </script>
 
@@ -61,6 +94,19 @@ const items = ref([
     margin-bottom: 10px;
     text-align: right;
     color: #7c7c7c;
+  }
+}
+td {
+  padding: 5px;
+  text-align: center;
+  border: 1px solid #dbdbdb;
+  &:nth-child(11),
+  &:nth-child(12) {
+    width: 50px;
+  }
+  img {
+    width: 60px;
+    background: rgb(208, 231, 238);
   }
 }
 </style>

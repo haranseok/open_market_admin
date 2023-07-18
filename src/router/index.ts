@@ -22,6 +22,7 @@ const router = createRouter({
     },
     {
       path: "/goods",
+      redirect: "/goods/list",
       components: {
         TheHeader,
         TheSlideNav,
@@ -31,6 +32,10 @@ const router = createRouter({
         {
           path: "list",
           component: import("@/pages/goods/GoodsList.vue"),
+        },
+        {
+          path: "inventory",
+          component: import("@/pages/goods/Inventory.vue"),
         },
       ],
     },

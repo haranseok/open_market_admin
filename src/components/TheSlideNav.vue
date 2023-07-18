@@ -29,6 +29,7 @@
             v-bind="props"
             title="상품관리"
             prepend-icon="mdi-gift"
+            @click="routerLink('/goods')"
           ></v-list-item>
         </template>
         <v-list-item
@@ -163,7 +164,7 @@ import { useNavDrawerStore } from "@/stores/NavDrawerStore";
 const router = useRouter();
 const navDrawerStore = useNavDrawerStore();
 const goods = ref([
-  ["상품 리스트", "goods_list", "goods/list"],
+  ["상품 리스트", "goods_list", "list"],
   ["상품 재고관리", "inventory", "inventory"],
 ]);
 const orders = ref([

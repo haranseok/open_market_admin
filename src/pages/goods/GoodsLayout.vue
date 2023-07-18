@@ -34,9 +34,11 @@
 
 <script lang="ts" setup>
 import { ref, watchEffect } from "vue";
+import { useRoute } from "vue-router";
 import TheBreadCrumbs from "@/components/TheBreadCrumbs.vue";
 import CommonInput from "@/components/items/CommonInput.vue";
 
+const route = useRoute();
 const title = ref("상품관리");
 const goodsName = ref("");
 const goodsCode = ref("");
@@ -51,7 +53,7 @@ const items = ref([
   {
     title: "상품리스트",
     disabled: true,
-    href: "goods",
+    href: "/goods/list",
   },
 ]);
 const getName = (e: string) => {
@@ -74,6 +76,19 @@ const doSearch = () => {
     end: endData.value,
   };
 };
+
+watchEffect(
+  (route.path,
+  () => {
+    if (route.path === "/goods/list") {
+      (items.value[1].title = "상품리스트"),
+        (items.value[1].href = "/goods/list");
+    } else {
+      (items.value[1].title = "상품 재고관리"),
+        (items.value[1].href = "/goods/inventory");
+    }
+  })
+);
 </script>
 
 <style lang="scss" scoped>
