@@ -32,6 +32,17 @@ ul {
   background: #fafafa;
 }
 
+.base-table {
+  td {
+    padding: 5px;
+    text-align: center;
+    border: 1px solid #dbdbdb;
+    img {
+      width: 60px;
+      background: rgb(208, 231, 238);
+    }
+  }
+}
 /** display **/
 
 .inner-container {

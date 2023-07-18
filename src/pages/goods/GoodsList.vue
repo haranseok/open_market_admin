@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <h4>총 &lpar; {{ items.length }} 건 &rpar;</h4>
-    <v-card>
+    <v-card class="base-table">
       <!-- <Table :headers="th" :items="items" /> -->
       <BaseTable :headers="th" :list="items">
         <template #list="{ row }">
@@ -33,6 +33,7 @@ import { ref } from "vue";
 // import Table from "@/components/tables/DefaultTable.vue";
 import BaseTable from "@/components/tables/BaseTable.vue";
 const th = ref([
+  "전체선택",
   "상품 id",
   "store",
   "대표 이미지",
@@ -94,19 +95,6 @@ const items = ref([
     margin-bottom: 10px;
     text-align: right;
     color: #7c7c7c;
-  }
-}
-td {
-  padding: 5px;
-  text-align: center;
-  border: 1px solid #dbdbdb;
-  &:nth-child(11),
-  &:nth-child(12) {
-    width: 50px;
-  }
-  img {
-    width: 60px;
-    background: rgb(208, 231, 238);
   }
 }
 </style>

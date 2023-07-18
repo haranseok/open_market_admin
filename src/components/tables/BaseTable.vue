@@ -4,16 +4,22 @@
       <thead>
         <tr>
           <th v-for="(th, i) in headers" :key="i">
-            {{ th }}
+            <div v-if="i === 0"><input type="checkbox" /></div>
+            <div v-else>{{ th }}</div>
           </th>
         </tr>
       </thead>
       <tbody>
         <template v-for="(row, i) in list" :key="i">
           <tr>
+            <td class="small"><input type="checkbox" /></td>
             <slot name="list" :row="row"></slot>
-            <td><v-btn icon="mdi-pencil-circle" variant="text"></v-btn></td>
-            <td><v-btn icon="mdi-delete-circle" variant="text"></v-btn></td>
+            <td class="small">
+              <v-btn icon="mdi-pencil-circle" variant="text"></v-btn>
+            </td>
+            <td class="small">
+              <v-btn icon="mdi-delete-circle" variant="text"></v-btn>
+            </td>
           </tr>
         </template>
       </tbody>
@@ -43,16 +49,8 @@ table {
       text-transform: uppercase;
     }
   }
-  tbody {
-    td {
-      padding: 5px;
-      text-align: center;
-      border: 1px solid #dbdbdb;
-      &:nth-child(11),
-      &:nth-child(12) {
-        width: 50px;
-      }
-    }
+  .small {
+    width: 50px;
   }
 }
 </style>
