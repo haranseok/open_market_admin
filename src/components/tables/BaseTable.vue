@@ -4,7 +4,13 @@
       <thead>
         <tr>
           <th v-for="(th, i) in headers" :key="i">
-            <div v-if="i === 0"><input type="checkbox" /></div>
+            <div v-if="i === 0">
+              <input type="checkbox" id="all" v-model="allSelected" /><label
+                for="all"
+                style="display: none"
+                >전체선택</label
+              >
+            </div>
             <div v-else>{{ th }}</div>
           </th>
         </tr>
@@ -12,7 +18,9 @@
       <tbody>
         <template v-for="(row, i) in list" :key="i">
           <tr>
-            <td class="small"><input type="checkbox" /></td>
+            <td class="small">
+              <input type="checkbox" v-model="selectedList" :value="row" />
+            </td>
             <slot name="list" :row="row"></slot>
             <td class="small">
               <v-btn icon="mdi-pencil-circle" variant="text"></v-btn>
@@ -28,11 +36,24 @@
 </template>
 
 <script lang="ts" setup>
+import { computed, ref } from "vue";
+
 export interface Tables {
   headers: any;
   list: any;
 }
 const { headers, list } = defineProps<Tables>();
+
+let selectedList = ref([]);
+const allSelected = computed({
+  get: () => {
+    console.log(selectedList.value);
+    return list.length === selectedList.value.length;
+  },
+  set: (e) => {
+    selectedList.value = e ? list : [];
+  },
+});
 </script>
 
 <style lang="scss" scoped>

@@ -19,6 +19,7 @@
         </template>
       </BaseTable>
     </v-card>
+    <v-btn class="update-btn" color="#E53935">일괄 수정</v-btn>
   </div>
 </template>
 
@@ -46,13 +47,13 @@ const items = ref([
     storage: 200,
   },
   {
-    goodsName: "a 상품",
+    goodsName: "b 상품",
     img: "",
     oders: 0,
     storage: 200,
   },
   {
-    goodsName: "a 상품",
+    goodsName: "c 상품",
     img: "",
     oders: 0,
     storage: 200,
@@ -80,5 +81,12 @@ const items = ref([
       width: 100px;
     }
   }
+}
+.update-btn {
+  margin: 3% 0;
+  float: right;
+  clear: both;
+  color: #e7e7e7;
+  font-weight: bold;
 }
 </style>

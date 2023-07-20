@@ -25,6 +25,7 @@
         </template>
       </BaseTable>
     </v-card>
+    <v-btn class="delete-btn" color="#E53935">일괄 삭제</v-btn>
   </div>
 </template>
 
@@ -96,5 +97,12 @@ const items = ref([
     text-align: right;
     color: #7c7c7c;
   }
+}
+.delete-btn {
+  margin: 3% 0;
+  float: right;
+  clear: both;
+  color: #e7e7e7;
+  font-weight: bold;
 }
 </style>
