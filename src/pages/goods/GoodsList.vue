@@ -1,9 +1,13 @@
 <template>
   <div class="container">
     <h4>총 &lpar; {{ items.length }} 건 &rpar;</h4>
-    <v-card class="base-table">
-      <!-- <Table :headers="th" :items="items" /> -->
-      <BaseTable :headers="th" :list="items">
+    <section class="base-table">
+      <BaseTable
+        :headers="th"
+        :list="items"
+        :btn-text="'일괄 삭제'"
+        @btn-event="doDelete"
+      >
         <template #list="{ row }">
           <td>{{ row.id }}</td>
           <td>{{ row.store }}</td>
@@ -24,14 +28,12 @@
           <td>{{ row.createDate }}</td>
         </template>
       </BaseTable>
-    </v-card>
-    <v-btn class="delete-btn" color="#E53935">일괄 삭제</v-btn>
+    </section>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { ref } from "vue";
-// import Table from "@/components/tables/DefaultTable.vue";
 import BaseTable from "@/components/tables/BaseTable.vue";
 const th = ref([
   "전체선택",
@@ -87,6 +89,10 @@ const items = ref([
     createDate: "2023-07-17",
   },
 ]);
+
+const doDelete = (e: any) => {
+  console.log(e);
+};
 </script>
 
 <style lang="scss" scoped>
@@ -97,12 +103,5 @@ const items = ref([
     text-align: right;
     color: #7c7c7c;
   }
-}
-.delete-btn {
-  margin: 3% 0;
-  float: right;
-  clear: both;
-  color: #e7e7e7;
-  font-weight: bold;
 }
 </style>

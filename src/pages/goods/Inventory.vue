@@ -1,7 +1,13 @@
 <template>
   <div class="container">
-    <v-card class="base-table">
-      <BaseTable :headers="th" :list="items" class="table">
+    <section class="base-table">
+      <BaseTable
+        :headers="th"
+        :list="items"
+        :btn-text="'일괄 수정'"
+        @btn-event="doUpdate"
+        class="table"
+      >
         <template #list="{ row }">
           <td>{{ row.goodsName }}</td>
           <td>
@@ -18,8 +24,7 @@
           <td class="checkbox"><input type="checkbox" /></td>
         </template>
       </BaseTable>
-    </v-card>
-    <v-btn class="update-btn" color="#E53935">일괄 수정</v-btn>
+    </section>
   </div>
 </template>
 
@@ -59,6 +64,10 @@ const items = ref([
     storage: 200,
   },
 ]);
+
+const doUpdate = (e: any) => {
+  console.log(e);
+};
 </script>
 
 <style lang="scss" scoped>
@@ -81,12 +90,5 @@ const items = ref([
       width: 100px;
     }
   }
-}
-.update-btn {
-  margin: 3% 0;
-  float: right;
-  clear: both;
-  color: #e7e7e7;
-  font-weight: bold;
 }
 </style>
