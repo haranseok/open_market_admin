@@ -31,7 +31,6 @@
 <script lang="ts" setup>
 import { ref } from "vue";
 import BaseTable from "@/components/tables/BaseTable.vue";
-
 const th = ref([
   "전체선택",
   "상품 명",

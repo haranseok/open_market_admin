@@ -34,6 +34,7 @@
         </tbody>
       </table>
     </v-card>
+    <Pagination :paging="paging" @pageUpdate="pageUpdate" />
     <v-btn class="update-btn" color="#E53935" @click="btnEvent">{{
       btnText
     }}</v-btn>
@@ -41,8 +42,8 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, ref } from "vue";
-
+import { computed, ref, onMounted } from "vue";
+import Pagination from "@/components/items/ThePagination.vue";
 export interface Tables {
   headers: any;
   list: any;
@@ -51,6 +52,22 @@ export interface Tables {
 
 const { headers, list, btnText } = defineProps<Tables>();
 const emits = defineEmits(["btnEvent"]);
+
+const btnEvent = () => {
+  emits("btnEvent", selectedList.value);
+};
+
+const paging = ref({});
+
+const getList = () => {
+  let pageSize = 10;
+  paging.value = { pageView: pageSize };
+};
+
+const pageUpdate = (page: object) => {
+  console.log(page);
+};
+
 let selectedList = ref([]);
 const allSelected = computed({
   get: () => {
@@ -61,9 +78,9 @@ const allSelected = computed({
   },
 });
 
-const btnEvent = () => {
-  emits("btnEvent", selectedList.value);
-};
+onMounted(() => {
+  getList();
+});
 </script>
 
 <style lang="scss" scoped>
