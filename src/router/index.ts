@@ -39,6 +39,14 @@ const router = createRouter({
         },
       ],
     },
+    {
+      path: "/members",
+      components: {
+        TheHeader,
+        TheSlideNav,
+        default: import("@/pages/members/MembersLayout.vue"),
+      },
+    },
   ],
 });
 

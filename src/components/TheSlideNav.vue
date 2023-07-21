@@ -66,10 +66,11 @@
           ></v-list-item>
         </template>
         <v-list-item
-          v-for="([title, value], i) in users"
+          v-for="([title, value, link], i) in users"
           :key="i"
           :title="title"
           :value="value"
+          @click="routerLink(link)"
         >
         </v-list-item>
       </v-list-group>
@@ -172,9 +173,9 @@ const orders = ref([
   ["결제대기", "payment"],
 ]);
 const users = ref([
-  ["일반 회원", "general_user"],
-  ["판매자 회원", "seller_user"],
-  ["관리자 회원", "admin_user"],
+  ["일반 회원", "general_user", "/members?type=general"],
+  ["판매자 회원", "seller_user", "/members?type=sales"],
+  ["관리자 회원", "admin_user", "/members?type=admin"],
 ]);
 const operate = ref([
   ["이벤트 관리", "event"],
