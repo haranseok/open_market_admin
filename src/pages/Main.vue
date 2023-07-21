@@ -36,6 +36,14 @@
           />
         </v-col>
       </v-card>
+      <div class="schedule flex">
+        <v-col cols="4">
+          <v-card>d</v-card>
+        </v-col>
+        <v-col cols="8">
+          <v-card><Calendar /></v-card>
+        </v-col>
+      </div>
     </div>
   </v-main>
 </template>
@@ -45,7 +53,7 @@ import { ref } from "vue";
 import TheBreadCrumbs from "@/components/TheBreadCrumbs.vue";
 import LineChart from "@/components/charts/LineChart.vue";
 import CardTable from "@/components/tables/CardTable.vue";
-
+import Calendar from "@/components/items/Calendar.vue";
 const title = ref("메인화면");
 const items = ref([
   {

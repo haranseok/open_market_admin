@@ -4,22 +4,22 @@
     <article class="inner-container">
       <div class="search-wrap jcsb">
         <div class="inner flex">
-          <CommonInput
+          <AtomInput
             :type="'text'"
             :placeholder="'상품명'"
             @changeInput="getName"
           />
-          <CommonInput
+          <AtomInput
             :type="'text'"
             :placeholder="'상품코드'"
             @changeInput="getCode"
           />
-          <CommonInput
+          <AtomInput
             :type="'date'"
             :dataPlaceholder="'시작날짜 YYYY-MM-DD'"
             @changeInput="getStartDate"
           />
-          <CommonInput
+          <AtomInput
             :type="'date'"
             :dataPlaceholder="'종료날짜 YYYY-MM-DD'"
             @changeInput="getEndDate"
@@ -36,7 +36,7 @@
 import { ref, watchEffect } from "vue";
 import { useRoute } from "vue-router";
 import TheBreadCrumbs from "@/components/TheBreadCrumbs.vue";
-import CommonInput from "@/components/items/CommonInput.vue";
+import AtomInput from "@/components/items/AtomInput.vue";
 
 const route = useRoute();
 const title = ref("상품관리");
