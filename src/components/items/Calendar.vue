@@ -106,6 +106,7 @@ onMounted(() => {
 
 .calendar-body {
   flex-grow: 1;
+  font-size: 0.8rem;
   .weeks {
     display: grid;
     grid-column: 1/8;
@@ -114,8 +115,10 @@ onMounted(() => {
     text-transform: capitalize;
     div {
       margin-top: 10px;
+      padding: 5px 0;
       font-weight: bold;
       border: 1px solid #eee;
+      border-bottom: none;
       &:nth-child(2n) {
         border-left: none;
         border-right: none;
@@ -134,9 +137,19 @@ onMounted(() => {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   grid-auto-rows: 15vh;
+  border-left: 1px solid #eee;
+  border-top: 1px solid #eee;
   .days {
-    border: 1px solid #eee;
     padding: 10px;
+    text-align: right;
+    border-right: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+    &:nth-child(7n + 1) {
+      color: rgb(211, 0, 0);
+    }
+    &:nth-child(7n) {
+      color: rgb(58, 58, 240);
+    }
   }
 }
 </style>
