@@ -2,7 +2,7 @@
   <v-main class="bg">
     <TheBreadCrumbs :title="title" :items="items" />
     <div class="inner-container">
-      <p>주문 상태별 주문 수</p>
+      <p class="text-overline">주문 상태별 주문 수</p>
       <v-card row="12">
         <LineChart :data="data" />
       </v-card>
@@ -36,9 +36,12 @@
           />
         </v-col>
       </v-card>
+      <p class="text-overline">schedule</p>
       <div class="schedule flex">
         <v-col cols="4">
-          <v-card>d</v-card>
+          <v-card>
+            <h3>일정</h3>
+          </v-card>
         </v-col>
         <v-col cols="8">
           <v-card><Calendar /></v-card>
@@ -126,6 +129,15 @@ const tableExchange = ref({
   }
   .table-wrap {
     display: flex;
+  }
+}
+
+.schedule {
+  .schedule-list {
+    margin: 5px 0;
+  }
+  .v-btn {
+    color: #eee;
   }
 }
 </style>

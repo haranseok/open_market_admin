@@ -20,8 +20,13 @@
         <div v-for="(week, i) in weeks" :key="i">{{ week }}</div>
       </article>
       <article class="days-container">
-        <div class="days" v-for="(day, i) in dayOfMonth" :key="i">
-          {{ day.day }}
+        <div
+          class="days"
+          v-for="(day, i) in dayOfMonth"
+          :key="i"
+          :class="{ currentDay: currentDate === day.dayInfo?.fullDay }"
+        >
+          <p class="date">{{ day.day }}</p>
         </div>
       </article>
     </div>
@@ -42,6 +47,13 @@ const weeks: ReadonlyArray<string> = [
   "sat",
 ];
 
+const currentDate = ref<string>(
+  getDateInfo.toLocaleDateString("ko-KR", {
+    year: "numeric",
+    month: "numeric",
+    day: "numeric",
+  })
+);
 const currentYearMonthDay = reactive<CalendarInterface.yearMonthDayType>({
   year: getDateInfo.getFullYear(),
   month: getDateInfo.getMonth(),
@@ -66,9 +78,9 @@ const repeatAddCurrentDays = (untilNum: number, value?: null): void => {
       dayOfMonth.value.push({
         day: i + 1,
         dayInfo: {
-          fullDay: `${currentYearMonthDay.year}.${
+          fullDay: `${currentYearMonthDay.year}. ${
             currentYearMonthDay.month + 1
-          }.`,
+          }. ${i + 1}.`,
         },
       });
     }
@@ -141,15 +153,36 @@ onMounted(() => {
   border-top: 1px solid #eee;
   .days {
     padding: 10px;
-    text-align: right;
     border-right: 1px solid #eee;
     border-bottom: 1px solid #eee;
-    &:nth-child(7n + 1) {
+    p {
+      text-align: center;
+    }
+    &:nth-child(7n + 1) p {
       color: rgb(211, 0, 0);
     }
     &:nth-child(7n) {
       color: rgb(58, 58, 240);
     }
+  }
+}
+
+.currentDay {
+  position: relative;
+  color: #fff;
+  z-index: 5;
+  &::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 7px;
+    right: 50%;
+    transform: translate(50%);
+    width: 25px;
+    height: 25px;
+    background: rgb(147, 166, 253);
+    border-radius: 50%;
+    z-index: -1;
   }
 }
 </style>
