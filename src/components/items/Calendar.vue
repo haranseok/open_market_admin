@@ -25,17 +25,22 @@
           v-for="(day, i) in dayOfMonth"
           :key="i"
           :class="{ currentDay: currentDate === day.dayInfo?.fullDay }"
+          @click="setSchedule(day.dayInfo?.fullDay)"
         >
           <p class="date">{{ day.day }}</p>
         </div>
       </article>
     </div>
   </section>
+  <ScheduleModal :date="date" :isOpen="isOpen" />
 </template>
 
 <script lang="ts" setup>
 import { ref, reactive, onMounted } from "vue";
 import { CalendarInterface } from "@/interfaces/CalandarInterface";
+import ScheduleModal from "@/components/modals/ScheduleModal.vue";
+const date = ref("");
+const isOpen = ref(false);
 const getDateInfo: Date = new Date();
 const weeks: ReadonlyArray<string> = [
   "sun",
@@ -104,6 +109,12 @@ const changeMonth = (val: number): void => {
 onMounted(() => {
   daysOfMonth(currentYearMonthDay.year, currentYearMonthDay.month);
 });
+
+const setSchedule = (e: any) => {
+  isOpen.value = true;
+  date.value = e;
+  console.log(e);
+};
 </script>
 
 <style lang="scss" scoped>
