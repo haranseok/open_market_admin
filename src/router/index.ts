@@ -9,10 +9,6 @@ const router = createRouter({
       redirect: "/main",
     },
     {
-      path: "/goods/main",
-      redirect: "/main",
-    },
-    {
       path: "/main",
       components: {
         TheHeader,
@@ -22,22 +18,11 @@ const router = createRouter({
     },
     {
       path: "/goods",
-      redirect: "/goods/list",
       components: {
         TheHeader,
         TheSlideNav,
         default: import("@/pages/goods/GoodsLayout.vue"),
       },
-      children: [
-        {
-          path: "list",
-          component: import("@/pages/goods/GoodsList.vue"),
-        },
-        {
-          path: "inventory",
-          component: import("@/pages/goods/Inventory.vue"),
-        },
-      ],
     },
     {
       path: "/members",

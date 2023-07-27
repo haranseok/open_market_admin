@@ -36,7 +36,7 @@
           />
         </v-col>
       </v-card>
-      <p class="text-overline">schedule</p>
+      <!-- <p class="text-overline">schedule</p>
       <div class="schedule flex">
         <v-col cols="4">
           <v-card>
@@ -46,17 +46,22 @@
         <v-col cols="8">
           <v-card><Calendar /></v-card>
         </v-col>
-      </div>
+      </div> -->
     </div>
   </v-main>
 </template>
 
 <script lang="ts" setup>
 import { ref } from "vue";
+import { useRouter } from "vue-router";
 import TheBreadCrumbs from "@/components/TheBreadCrumbs.vue";
 import LineChart from "@/components/charts/LineChart.vue";
 import CardTable from "@/components/tables/CardTable.vue";
-import Calendar from "@/components/items/Calendar.vue";
+// import Calendar from "@/components/items/Calendar.vue";
+
+const router = useRouter();
+localStorage.setItem("test", "aa");
+
 const title = ref("메인화면");
 const items = ref([
   {

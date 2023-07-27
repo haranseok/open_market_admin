@@ -74,37 +74,27 @@ const membersCount = ref([
   },
 ]);
 
-const queryType = () => {
-  let type = route.query.type;
-
-  if (type === "general") {
-    links.value[1] = {
-      title: "일반회원",
-      disabled: true,
-      href: "/members?type=general",
-    };
-    membersPage.value = GeneralMembers;
-  } else if (type === "sales") {
-    links.value[1] = {
-      title: "판매회원",
-      disabled: true,
-      href: "/members?type=sales",
-    };
-    membersPage.value = SalesMembers;
-  } else {
-    links.value[1] = {
-      title: "관리자 회원",
-      disabled: true,
-      href: "/members?type=admin",
-    };
-    membersPage.value = AdminMembers;
-  }
+const linksTypes = (title: string, href: string, component: any) => {
+  links.value[1] = {
+    title: title,
+    disabled: true,
+    href: `/members?type=${href}`,
+  };
+  membersPage.value = component;
 };
 
 watchEffect(
   (route.query,
   () => {
-    queryType();
+    let type = route.query.type;
+
+    if (type === "general") {
+      linksTypes("일반회원", "general", GeneralMembers);
+    } else if (type === "sales") {
+      linksTypes("판매회원", "sales", SalesMembers);
+    } else {
+      linksTypes("관리자 회원", "admin", AdminMembers);
+    }
   })
 );
 </script>

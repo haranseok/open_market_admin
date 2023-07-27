@@ -1,6 +1,6 @@
 <template>
   <v-main class="bg">
-    <TheBreadCrumbs :title="title" :items="items" />
+    <TheBreadCrumbs :title="'상품관리'" :items="links" />
     <article class="inner-container">
       <div class="search-wrap jcsb">
         <div class="inner flex">
@@ -27,7 +27,9 @@
         </div>
         <v-btn color="rgb(40, 53, 147)" @click="doSearch">검색</v-btn>
       </div>
-      <router-view></router-view>
+      <section>
+        <component :is="goodsPage"></component>
+      </section>
     </article>
   </v-main>
 </template>
@@ -37,14 +39,15 @@ import { ref, watchEffect } from "vue";
 import { useRoute } from "vue-router";
 import TheBreadCrumbs from "@/components/TheBreadCrumbs.vue";
 import AtomInput from "@/components/items/AtomInput.vue";
-
+import GoodsList from "./GoodsList.vue";
+import GoodsInventory from "./GoodsInventory.vue";
 const route = useRoute();
-const title = ref("상품관리");
+const goodsPage = ref(GoodsList);
 const goodsName = ref("");
 const goodsCode = ref("");
 const startData = ref("");
 const endData = ref("");
-const items = ref([
+const links = ref([
   {
     title: "home",
     disabled: false,
@@ -53,7 +56,7 @@ const items = ref([
   {
     title: "상품리스트",
     disabled: true,
-    href: "/goods/list",
+    href: "/goods?list",
   },
 ]);
 const getName = (e: string) => {
@@ -77,15 +80,23 @@ const doSearch = () => {
   };
 };
 
+const linksTypes = (title: string, href: string, component: any) => {
+  links.value[1] = {
+    title: title,
+    disabled: true,
+    href: `/goods?type=${href}`,
+  };
+  goodsPage.value = component;
+};
+
 watchEffect(
-  (route.path,
+  (route.query,
   () => {
-    if (route.path === "/goods/list") {
-      (items.value[1].title = "상품리스트"),
-        (items.value[1].href = "/goods/list");
+    let type = route.query.type;
+    if (type === "list") {
+      linksTypes("상품 리스트", "list", GoodsList);
     } else {
-      (items.value[1].title = "상품 재고관리"),
-        (items.value[1].href = "/goods/inventory");
+      linksTypes("상품 재고관리", "inventory", GoodsInventory);
     }
   })
 );
