@@ -164,7 +164,8 @@ import { useNavDrawerStore } from "@/stores/NavDrawerStore";
 const router = useRouter();
 const navDrawerStore = useNavDrawerStore();
 const goods = ref([
-  ["상품 리스트", "goods_list", "goods?type=list"],
+  ["상품 등록", "goods_update", "goods?type=update"],
+  ["상품 조회", "goods_list", "goods?type=list"],
   ["상품 재고관리", "inventory", "goods?type=inventory"],
 ]);
 const orders = ref([

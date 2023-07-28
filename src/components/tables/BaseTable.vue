@@ -35,9 +35,9 @@
       </table>
     </v-card>
     <Pagination :paging="paging" @pageUpdate="pageUpdate" />
-    <v-btn class="update-btn" color="#E53935" @click="btnEvent">{{
-      btnText
-    }}</v-btn>
+    <v-btn class="update-btn" color="#E53935" @click="btnEvent">
+      {{ btnText }}
+    </v-btn>
   </div>
 </template>
 

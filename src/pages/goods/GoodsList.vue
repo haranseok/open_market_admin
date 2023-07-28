@@ -22,7 +22,9 @@
           <td>{{ row.name }}</td>
           <td>{{ row.goodsName }}</td>
           <td>{{ row.status }}</td>
-          <td>{{ row.price }}</td>
+          <td>{{ row.supplyPrice }}</td>
+          <td>{{ row.salePrice }}</td>
+          <td>{{ row.discountPrice }}</td>
           <td>{{ row.option }}</td>
           <td>{{ row.imgStatus }}</td>
           <td>{{ row.createDate }}</td>
@@ -43,7 +45,9 @@ const th = ref([
   "판매자 명",
   "상품 명",
   "상태",
-  "가격",
+  "공급가",
+  "판매가",
+  "할인가",
   "옵션",
   "이미지 관리",
   "등록일자",
@@ -59,7 +63,9 @@ const items = ref([
     name: "홍길동",
     goodsName: "a 상품",
     status: "1",
-    price: "10,000원",
+    supplyPrice: "5,000원",
+    salePrice: "10,000원",
+    discountPrice: "8,000원",
     option: "1",
     imgStatus: "2",
     createDate: "2023-07-17",
@@ -71,7 +77,9 @@ const items = ref([
     name: "춘향",
     goodsName: "b 상품",
     status: "1",
-    price: "15,000원",
+    supplyPrice: "5,000원",
+    salePrice: "10,000원",
+    discountPrice: "",
     option: "1",
     imgStatus: "0",
     createDate: "2023-07-17",
@@ -83,7 +91,9 @@ const items = ref([
     name: "아무개",
     goodsName: "c 상품",
     status: "1",
-    price: "15,000원",
+    supplyPrice: "8,000원",
+    salePrice: "12,000원",
+    discountPrice: "",
     option: "1",
     imgStatus: "0",
     createDate: "2023-07-17",
@@ -93,6 +103,8 @@ const items = ref([
 const doDelete = (e: any) => {
   console.log(e);
 };
+
+const doCreate = () => {};
 </script>
 
 <style lang="scss" scoped>

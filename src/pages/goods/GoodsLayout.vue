@@ -2,7 +2,7 @@
   <v-main class="bg">
     <TheBreadCrumbs :title="'상품관리'" :items="links" />
     <article class="inner-container">
-      <div class="search-wrap jcsb">
+      <div class="search-wrap jcsb" v-if="isSearch">
         <div class="inner flex">
           <AtomInput
             :type="'text'"
@@ -41,8 +41,10 @@ import TheBreadCrumbs from "@/components/TheBreadCrumbs.vue";
 import AtomInput from "@/components/items/AtomInput.vue";
 import GoodsList from "./GoodsList.vue";
 import GoodsInventory from "./GoodsInventory.vue";
+import GoodsUpdate from "./GoodsUpdate.vue";
 const route = useRoute();
 const goodsPage = ref(GoodsList);
+const isSearch = ref(true);
 const goodsName = ref("");
 const goodsCode = ref("");
 const startData = ref("");
@@ -80,6 +82,7 @@ const doSearch = () => {
   };
 };
 
+const doGoodsCreate = () => {};
 const linksTypes = (title: string, href: string, component: any) => {
   links.value[1] = {
     title: title,
@@ -95,8 +98,11 @@ watchEffect(
     let type = route.query.type;
     if (type === "list") {
       linksTypes("상품 리스트", "list", GoodsList);
-    } else {
+    } else if (type === "inventory") {
       linksTypes("상품 재고관리", "inventory", GoodsInventory);
+    } else {
+      linksTypes("상품 등록", "update", GoodsUpdate);
+      isSearch.value = false;
     }
   })
 );
