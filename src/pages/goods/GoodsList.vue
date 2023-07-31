@@ -27,7 +27,7 @@
           <td>{{ row.discountPrice }}</td>
           <td>{{ row.option }}</td>
           <td>{{ row.imgStatus }}</td>
-          <td>{{ row.createDate }}</td>
+          <td>{{ DateHelpers.getDate(row.createDate) }}</td>
         </template>
       </BaseTable>
     </section>
@@ -37,6 +37,7 @@
 <script lang="ts" setup>
 import { ref } from "vue";
 import BaseTable from "@/components/tables/BaseTable.vue";
+import { DateHelpers } from "@/helpers/DateHelper";
 const th = ref([
   "전체선택",
   "상품 id",
@@ -68,7 +69,7 @@ const items = ref([
     discountPrice: "8,000원",
     option: "1",
     imgStatus: "2",
-    createDate: "2023-07-17",
+    createDate: "1690416000",
   },
   {
     id: "a1234567",
@@ -82,7 +83,7 @@ const items = ref([
     discountPrice: "",
     option: "1",
     imgStatus: "0",
-    createDate: "2023-07-17",
+    createDate: "1690416000",
   },
   {
     id: "c1234567",
@@ -96,7 +97,7 @@ const items = ref([
     discountPrice: "",
     option: "1",
     imgStatus: "0",
-    createDate: "2023-07-17",
+    createDate: "1690416000",
   },
 ]);
 

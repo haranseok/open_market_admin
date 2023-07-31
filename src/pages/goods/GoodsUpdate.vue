@@ -16,20 +16,20 @@
         <div class="category-wrap flex">
           <label for="category" class="title">분류</label>
           <div class="select-box">
-            <select id="category">
+            <select class="category" @click="doFocus">
               <option value="대분류">대분류</option>
             </select>
-            <select id="category">
+            <select class="category" @click="doFocus">
               <option value="중분류">중분류</option>
             </select>
-            <select id="category">
+            <select class="category" @click="doFocus">
               <option value="소분류">소분류</option>
             </select>
           </div>
         </div>
         <div class="delivery-select flex">
           <p class="title">택배사</p>
-          <select id="delivery">
+          <select class="category" @click="doFocus">
             <option value="1">우체국택배</option>
             <option value="1">cj대한통운</option>
             <option value="1">한진택배</option>
@@ -65,7 +65,7 @@
       <section class="flex">
         <p class="title">상품이미지</p>
         <div class="img-wrap">
-          <label for="imgUpload">
+          <label for="imgUpload" class="cp">
             <v-icon>mdi-plus-circle-outline</v-icon>
             <small>대표이미지</small>
           </label>
@@ -82,7 +82,20 @@
   </article>
 </template>
 
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import { ref } from "vue";
+const doFocus = (e: any) => {
+  removeFocus();
+  e.target.classList.add("focus");
+};
+
+const removeFocus = () => {
+  let category = document.getElementsByClassName("category");
+  for (let i = 0; i < category.length; i++) {
+    category[i].classList.remove("focus");
+  }
+};
+</script>
 
 <style lang="scss" scoped>
 .base {
@@ -107,6 +120,11 @@
       width: 80%;
       padding: 5px 10px;
       border: 1px solid #c4c4c4;
+      transition: 0.3s;
+    }
+    .focus {
+      transition: 0.3s;
+      border: 1px solid rgb(23, 77, 194);
     }
   }
 }
