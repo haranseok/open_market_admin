@@ -16,20 +16,20 @@
         <div class="category-wrap flex">
           <label for="category" class="title">분류</label>
           <div class="select-box">
-            <select class="category" @click="doFocus">
+            <select class="category cp" @click="doFocus">
               <option value="대분류">대분류</option>
             </select>
-            <select class="category" @click="doFocus">
+            <select class="category cp" @click="doFocus">
               <option value="중분류">중분류</option>
             </select>
-            <select class="category" @click="doFocus">
+            <select class="category cp" @click="doFocus">
               <option value="소분류">소분류</option>
             </select>
           </div>
         </div>
         <div class="delivery-select flex">
           <p class="title">택배사</p>
-          <select class="category" @click="doFocus">
+          <select class="category cp" @click="doFocus">
             <option value="1">우체국택배</option>
             <option value="1">cj대한통운</option>
             <option value="1">한진택배</option>
@@ -59,20 +59,23 @@
       </section>
     </div>
   </article>
-  <article class="container">
+  <article class="container details">
     <h4>이미지정보</h4>
     <div class="inner">
-      <section class="flex">
+      <section>
         <p class="title">상품이미지</p>
-        <div class="img-wrap">
-          <label for="imgUpload" class="cp">
-            <v-icon>mdi-plus-circle-outline</v-icon>
-            <small>대표이미지</small>
-          </label>
-          <input type="file" id="imgUpload" />
+        <div class="img-container">
+          <ImgUpload
+            :src="imgSrc"
+            :alt="imgAlt"
+            :label-text="'대표이미지'"
+            :imgShow="imgShow"
+            :labelShow="labelShow"
+            @imaFileUpload="imgFileUpload"
+          />
         </div>
       </section>
-      <section class="flex">
+      <section>
         <p class="title">상품상세</p>
         <div class="goods-detail">
           <textarea name="" id="" cols="30" rows="10"></textarea>
@@ -83,7 +86,13 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from "vue";
+import { ref, watchEffect } from "vue";
+import ImgUpload from "@/components/items/ImgUploadInput.vue";
+const imgShow = ref(false);
+const labelShow = ref(true);
+const imgSrc = ref();
+const imgAlt = ref("");
+const files = ref();
 const doFocus = (e: any) => {
   removeFocus();
   e.target.classList.add("focus");
@@ -95,6 +104,27 @@ const removeFocus = () => {
     category[i].classList.remove("focus");
   }
 };
+
+const imgFileUpload = (e: any) => {
+  files.value = e.target.files[0];
+
+  const reader = new FileReader();
+  reader.onload = (e: any) => {
+    imgSrc.value = e.target.result;
+  };
+
+  reader.readAsDataURL(files.value);
+};
+files.value = "";
+watchEffect(
+  (files.value,
+  () => {
+    if (files.value !== "") {
+      imgShow.value = true;
+      labelShow.value = false;
+    }
+  })
+);
 </script>
 
 <style lang="scss" scoped>
@@ -158,25 +188,24 @@ input[type="text"] {
   }
 }
 
-.img-wrap {
-  label {
-    display: block;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border: 2px dashed #aaa;
-    padding: 15px;
-    .v-icon {
-      font-size: 2rem;
-      margin-bottom: 5px;
-    }
-    small {
-      color: rgb(211, 74, 11);
-      font-weight: bold;
-    }
+.details section {
+  width: 100%;
+  .title {
+    margin: 10px 0;
   }
-  input[type="file"] {
-    display: none;
+  .img-container {
+    width: 100%;
+  }
+
+  .goods-detail {
+    width: 100%;
+    textarea {
+      width: 100%;
+      padding: 2%;
+      resize: none;
+      border-radius: 5px;
+      background: #f5f5f5;
+    }
   }
 }
 </style>
