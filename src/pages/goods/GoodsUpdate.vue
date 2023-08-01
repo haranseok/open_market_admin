@@ -6,54 +6,78 @@
         <div class="goods">
           <div class="goods-inner flex">
             <label for="goods-code" class="title">상품코드</label>
-            <input type="text" id="goods-code" />
+            <input type="text" id="goods-code" v-model="formData.goodsCode" />
           </div>
           <div class="goods-inner flex">
             <label for="goods-name" class="title">상품명</label>
-            <input type="text" id="goods-name" />
+            <input type="text" id="goods-name" v-model="formData.goodsName" />
           </div>
         </div>
         <div class="category-wrap flex">
           <label for="category" class="title">분류</label>
           <div class="select-box">
-            <select class="category cp" @click="doFocus">
+            <select
+              class="category cp"
+              @click="doFocus"
+              v-model="formData.categoty.main"
+            >
               <option value="대분류">대분류</option>
             </select>
-            <select class="category cp" @click="doFocus">
+            <select
+              class="category cp"
+              @click="doFocus"
+              v-model="formData.categoty.middle"
+            >
               <option value="중분류">중분류</option>
             </select>
-            <select class="category cp" @click="doFocus">
+            <select
+              class="category cp"
+              @click="doFocus"
+              v-model="formData.categoty.small"
+            >
               <option value="소분류">소분류</option>
             </select>
           </div>
         </div>
         <div class="delivery-select flex">
           <p class="title">택배사</p>
-          <select class="category cp" @click="doFocus">
-            <option value="1">우체국택배</option>
-            <option value="1">cj대한통운</option>
-            <option value="1">한진택배</option>
-            <option value="1">롯데택배</option>
+          <select
+            class="category cp"
+            @click="doFocus"
+            v-model="formData.delivery"
+          >
+            <option value="우체국택배">우체국택배</option>
+            <option value="cj대한통운">cj대한통운</option>
+            <option value="한진택배">한진택배</option>
+            <option value="롯데택배">롯데택배</option>
           </select>
         </div>
         <div class="delivety-price flex">
           <label for="price" class="title">배송비</label>
-          <input type="text" id="price" />
+          <input type="text" id="price" v-model="formData.deliveryFee" />
         </div>
       </section>
       <section>
         <ul>
           <li class="flex">
-            <label for="salePrice" class="title">판매가</label
-            ><input type="text" id="salePrice" />
+            <label for="salePrice" class="title">판매가</label>
+            <input type="text" id="salePrice" v-model="formData.salePrice" />
           </li>
           <li class="flex">
-            <label for="supplyPrice" class="title">공급가</label
-            ><input type="text" id="supplyPrice" />
+            <label for="supplyPrice" class="title">공급가</label>
+            <input
+              type="text"
+              id="supplyPrice"
+              v-model="formData.supplyPrice"
+            />
           </li>
           <li class="flex">
-            <label for="discountPrice" class="title">할인가</label
-            ><input type="text" id="discountPrice" />
+            <label for="discountPrice" class="title">할인가</label>
+            <input
+              type="text"
+              id="discountPrice"
+              v-model="formData.discountPrice"
+            />
           </li>
         </ul>
       </section>
@@ -78,21 +102,49 @@
       <section>
         <p class="title">상품상세</p>
         <div class="goods-detail">
-          <textarea name="" id="" cols="30" rows="10"></textarea>
+          <textarea
+            name="goodsDetail"
+            cols="30"
+            rows="10"
+            v-model="formData.detail"
+          ></textarea>
         </div>
       </section>
     </div>
   </article>
+  <div class="btn-container">
+    <v-btn @click="gooodsUpload">등록</v-btn>
+    <v-btn color="error" @click="doCancel">취소</v-btn>
+  </div>
 </template>
 
 <script lang="ts" setup>
 import { ref, watchEffect } from "vue";
 import ImgUpload from "@/components/items/ImgUploadInput.vue";
+
 const imgShow = ref(false);
 const labelShow = ref(true);
 const imgSrc = ref();
 const imgAlt = ref("");
-const files = ref();
+const files = ref("");
+
+const formData = ref({
+  goodsCode: "",
+  goodsName: "",
+  salePrice: 0,
+  supplyPrice: 0,
+  discountPrice: 0,
+  deliveryFee: 0,
+  delivery: "",
+  categoty: {
+    main: "",
+    middle: "",
+    small: "",
+  },
+  file: files.value,
+  detail: "",
+});
+
 const doFocus = (e: any) => {
   removeFocus();
   e.target.classList.add("focus");
@@ -115,7 +167,7 @@ const imgFileUpload = (e: any) => {
 
   reader.readAsDataURL(files.value);
 };
-files.value = "";
+
 watchEffect(
   (files.value,
   () => {
@@ -125,6 +177,29 @@ watchEffect(
     }
   })
 );
+
+const gooodsUpload = () => {
+  console.log(formData.value);
+};
+
+const doCancel = () => {
+  formData.value = {
+    goodsCode: "",
+    goodsName: "",
+    salePrice: 0,
+    supplyPrice: 0,
+    discountPrice: 0,
+    deliveryFee: 0,
+    delivery: "",
+    categoty: {
+      main: "",
+      middle: "",
+      small: "",
+    },
+    file: "",
+    detail: "",
+  };
+};
 </script>
 
 <style lang="scss" scoped>
@@ -171,6 +246,7 @@ input[type="text"] {
   padding: 5px 10px;
   border: 1px solid #c4c4c4;
   transition: 0.3s;
+  text-align: right;
   &:focus {
     transition: 0.3s;
     border: 1px solid rgb(23, 77, 194);
@@ -206,6 +282,15 @@ input[type="text"] {
       border-radius: 5px;
       background: #f5f5f5;
     }
+  }
+}
+
+.btn-container {
+  margin: 3% 0;
+  text-align: center;
+  .v-btn {
+    width: 150px;
+    margin: 0 10px;
   }
 }
 </style>

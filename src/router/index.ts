@@ -25,6 +25,14 @@ const router = createRouter({
       },
     },
     {
+      path: "/orders",
+      components: {
+        TheHeader,
+        TheSlideNav,
+        default: import("@/pages/orders/OrderLayout.vue"),
+      },
+    },
+    {
       path: "/members",
       components: {
         TheHeader,

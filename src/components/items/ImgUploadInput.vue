@@ -38,23 +38,32 @@ const imgFileUpload = (e: any) => {
 <style lang="scss" scoped>
 .img-wrap {
   width: 25%;
+  max-width: 200px;
   img {
     width: 100%;
     max-width: 200px;
   }
   label {
-    height: 100px;
+    height: 200px;
     display: block;
     display: flex;
     flex-direction: column;
     align-items: center;
     border: 2px dashed #aaa;
-    padding: 20px;
+    position: relative;
     .v-icon {
+      position: absolute;
+      top: 45%;
+      left: 50%;
+      transform: translate(-50%, -50%);
       font-size: 2rem;
       margin-bottom: 5px;
     }
     small {
+      position: absolute;
+      top: 60%;
+      left: 50%;
+      transform: translate(-50%, -50%);
       color: rgb(211, 74, 11);
       font-weight: bold;
     }

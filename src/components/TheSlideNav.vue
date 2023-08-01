@@ -40,7 +40,14 @@
         >
         </v-list-item>
       </v-list-group>
-      <v-list-group value="order">
+      <v-list-item
+        title="주문관리"
+        prepend-icon="mdi-cart"
+        value="order"
+        @click="router.push('/orders')"
+      ></v-list-item>
+
+      <!-- <v-list-group value="order">
         <template v-slot:activator="{ props }">
           <v-list-item
             v-bind="props"
@@ -55,7 +62,7 @@
           :value="value"
         >
         </v-list-item>
-      </v-list-group>
+      </v-list-group> -->
       <v-list-group value="users">
         <template v-slot:activator="{ props }">
           <v-list-item
