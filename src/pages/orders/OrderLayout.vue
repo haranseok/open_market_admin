@@ -13,14 +13,41 @@
         <p class="count">{{ list.count }}</p>
       </li>
     </ul>
-    <div class="table-container"></div>
+    <div class="base-table">
+      <BaseTable
+        :headers="th"
+        :list="items"
+        :btn-text="'일괄 삭제'"
+        @btn-event="doDelete"
+      >
+        <template #list="{ row }">
+          <td style="width: 200px">
+            <a href="#"
+              ><p @click="geOrderData(row)">{{ row.orderNum }}</p></a
+            >
+          </td>
+          <td>{{ row.goodsName }}</td>
+          <td>{{ row.amount }}</td>
+          <td>{{ row.price }}</td>
+          <td>{{ row.orderName }}</td>
+          <td>{{ row.recipient }}</td>
+          <td style="width: 150px">{{ row.orderStatus }}</td>
+          <td style="width: 200px">
+            {{ DateHelpers.getDateTime(row.orderDate) }}
+          </td>
+        </template>
+      </BaseTable>
+    </div>
   </v-main>
+  <OrderInfo :isShowModal="isOrderInfo" />
 </template>
 
 <script lang="ts" setup>
-import TheBreadCrumbs from "@/components/TheBreadCrumbs.vue";
 import { ref } from "vue";
-
+import { DateHelpers } from "@/helpers/DateHelper";
+import TheBreadCrumbs from "@/components/TheBreadCrumbs.vue";
+import BaseTable from "@/components/tables/BaseTable.vue";
+import OrderInfo from "@/pages/orders/OrderInfo.vue";
 const links = ref([
   {
     title: "home",
@@ -34,7 +61,9 @@ const links = ref([
   },
 ]);
 
-let tabName = ref([
+const isOrderInfo = ref(false);
+
+const tabName = ref([
   { name: "신규주문", count: 5 },
   { name: "입금대기", count: 1 },
   { name: "결제완료", count: 5 },
@@ -46,37 +75,57 @@ let tabName = ref([
 const currentTab = ref(0);
 const th = ref([
   "전체선택",
-  "주문자 id",
+  "주문번호",
   "상품명",
-  "주문자명",
-  "수령자인",
-  "등록일자",
+  "수량",
+  "상품금액",
+  "주문자",
+  "수령인",
+  "주문상태",
+  "주문일자",
   "수정",
   "삭제",
 ]);
+
 const items = ref([
   {
-    id: "test",
-    name: "홍길동",
-    status: 1,
-    createDate: "2023-07-17",
+    orderNum: 12345678,
+    goodsName: "굿즈",
+    amount: 1,
+    price: 15000,
+    orderName: "홍길동",
+    recipient: "춘향",
+    orderStatus: "무통장입금대기",
+    orderDate: "1690879396",
   },
   {
-    id: "aaa123",
-    name: "홍길동2",
-    status: 1,
-    createDate: "2023-07-17",
+    orderNum: 456789102513,
+    goodsName: "굿즈1",
+    amount: 2,
+    price: 18000,
+    orderName: "둘리",
+    recipient: "둘리",
+    orderStatus: "결제완료",
+    orderDate: "1690879396",
   },
   {
-    id: "bbb123",
-    name: "홍길동3",
-    status: 2,
-    createDate: "2023-07-17",
+    orderNum: 1234567258,
+    goodsName: "굿즈3",
+    amount: 3,
+    price: 25000,
+    orderName: "아무개",
+    recipient: "아무개",
+    orderStatus: "결제완료",
+    orderDate: "1690879396",
   },
 ]);
 
 const tabClick = (e: number) => {
   currentTab.value = e;
+};
+
+const geOrderData = () => {
+  isOrderInfo.value = true;
 };
 </script>
 

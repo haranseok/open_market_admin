@@ -20,7 +20,7 @@
           <template v-for="(row, i) in list" :key="i">
             <tr>
               <td class="small">
-                <input type="checkbox" v-model="selectedList" :value="row" />
+                <input type="checkbox" v-model="checkedList" :value="row" />
               </td>
               <slot name="list" :row="row"></slot>
               <td class="small">
@@ -44,6 +44,7 @@
 <script lang="ts" setup>
 import { computed, ref, onMounted } from "vue";
 import Pagination from "@/components/items/ThePagination.vue";
+
 export interface Tables {
   headers: any;
   list: any;
@@ -54,7 +55,7 @@ const { headers, list, btnText } = defineProps<Tables>();
 const emits = defineEmits(["btnEvent"]);
 
 const btnEvent = () => {
-  emits("btnEvent", selectedList.value);
+  emits("btnEvent", checkedList.value);
 };
 
 const paging = ref({});
@@ -68,13 +69,13 @@ const pageUpdate = (page: object) => {
   console.log(page);
 };
 
-let selectedList = ref([]);
+let checkedList = ref([]);
 const allSelected = computed({
   get: () => {
-    return list.length === selectedList.value.length;
+    return list.length === checkedList.value.length;
   },
   set: (e) => {
-    selectedList.value = e ? list : [];
+    checkedList.value = e ? list : [];
   },
 });
 

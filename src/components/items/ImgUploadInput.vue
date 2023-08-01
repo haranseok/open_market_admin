@@ -17,7 +17,7 @@
 </template>
 
 <script lang="ts" setup>
-export interface FILEUPLOAD {
+export interface FileUpload {
   src: any;
   alt: string;
   labelText: string;
@@ -25,7 +25,7 @@ export interface FILEUPLOAD {
   labelShow: boolean;
 }
 
-const { src, alt, labelText, imgShow, labelShow } = defineProps<FILEUPLOAD>();
+const { src, alt, labelText, imgShow, labelShow } = defineProps<FileUpload>();
 const emits = defineEmits<{
   (e: "imaFileUpload", value: any): void;
 }>();
