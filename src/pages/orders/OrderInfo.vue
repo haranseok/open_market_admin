@@ -1,6 +1,6 @@
 <template>
   <div>
-    <dialog v-if="isShowModal"></dialog>
+    <dialog v-if="isShowModal">dd</dialog>
   </div>
 </template>
 
