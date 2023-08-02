@@ -7,6 +7,6 @@ export namespace GoodsInterface {
 
   export interface ResponseListSchema extends AtomInterface.ResponseBase {
     count: number;
-    list: any;
+    list: [];
   }
 }
