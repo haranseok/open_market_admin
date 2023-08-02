@@ -7,7 +7,7 @@ export const useButtonStore = defineStore("ButtonStore", {
   getters: {},
   actions: {
     setButtonClick() {
-      return this.list;
+      this.list;
     },
   },
 });

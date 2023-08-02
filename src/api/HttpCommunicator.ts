@@ -1,6 +1,6 @@
 import axios from "axios";
 export class HttpCommunicator {
-  static async exec(url: string, method: string, params: any, header: any) {
+  static async exec(url: string, method: string, params: any, header?: any) {
     try {
       let data: any;
       switch (method.toLowerCase()) {

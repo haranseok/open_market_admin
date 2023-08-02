@@ -19,7 +19,7 @@
 <script lang="ts" setup>
 import { ref } from "vue";
 import BaseTable from "@/components/tables/BaseTable.vue";
-import { useButtonStore } from "@/stores/ButtonSrote";
+import { useButtonStore } from "@/stores/ButtonStore";
 
 const button = useButtonStore();
 
@@ -56,3 +56,4 @@ const items = ref([
 </script>
 
 <style lang="scss" scoped></style>
+@/stores/ButtonSrore @/stores/ButtonStore

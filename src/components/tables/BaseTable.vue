@@ -41,7 +41,7 @@
 <script lang="ts" setup>
 import { computed, ref, onMounted, watchEffect } from "vue";
 import Pagination from "@/components/items/ThePagination.vue";
-import { useButtonStore } from "@/stores/ButtonSrote";
+import { useButtonStore } from "@/stores/ButtonStore";
 
 export interface Tables {
   headers: any;
@@ -104,3 +104,4 @@ table {
   }
 }
 </style>
+@/stores/ButtonSrore @/stores/ButtonStore

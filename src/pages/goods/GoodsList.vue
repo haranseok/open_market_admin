@@ -22,7 +22,7 @@
           <td>{{ row.discountPrice }}</td>
           <td>{{ row.option }}</td>
           <td>{{ row.imgStatus }}</td>
-          <td>{{ DateHelpers.getDate(row.createDate) }}</td>
+          <td>{{ DateHelpers.getDate(row.created_at) }}</td>
         </template>
       </BaseTable>
       <v-btn class="delete-btn" @click="doDelete" color="error">일괄삭제</v-btn>
@@ -34,8 +34,8 @@
 import { ref, watchEffect } from "vue";
 import BaseTable from "@/components/tables/BaseTable.vue";
 import { DateHelpers } from "@/helpers/DateHelper";
-import { useButtonStore } from "@/stores/ButtonSrote";
-
+import { useButtonStore } from "@/stores/ButtonStore";
+import { GoodsService } from "@/services/GoodsService";
 const button = useButtonStore();
 
 const doDelete = () => {
@@ -61,50 +61,31 @@ const th = ref([
   "삭제",
 ]);
 
-const items = ref([
-  {
-    id: "a12345",
-    store: "aStore",
-    img: "",
-    name: "홍길동",
-    goodsName: "a 상품",
-    status: "1",
-    supplyPrice: "5,000원",
-    salePrice: "10,000원",
-    discountPrice: "8,000원",
-    option: "1",
-    imgStatus: "2",
-    createDate: "1690416000",
-  },
-  {
-    id: "a1234567",
-    store: "bStore",
-    img: "",
-    name: "춘향",
-    goodsName: "b 상품",
-    status: "1",
-    supplyPrice: "5,000원",
-    salePrice: "10,000원",
-    discountPrice: "",
-    option: "1",
-    imgStatus: "0",
-    createDate: "1690416000",
-  },
-  {
-    id: "c1234567",
-    store: "cStore",
-    img: "",
-    name: "아무개",
-    goodsName: "c 상품",
-    status: "1",
-    supplyPrice: "8,000원",
-    salePrice: "12,000원",
-    discountPrice: "",
-    option: "1",
-    imgStatus: "0",
-    createDate: "1690416000",
-  },
-]);
+const items = ref({});
+
+const getList = async (pageNum: string, itemCount: string) => {
+  let res = await GoodsService.getGoodsList(pageNum, itemCount);
+  let list: any = [];
+  res.list.forEach((e: any) => {
+    list.push({
+      id: e.id,
+      store: e.mall_info.mall_name,
+      img: e.image,
+      name: "",
+      goodsName: e.name,
+      status: e.status === "1" ? "노출" : "비노출",
+      supplyPrice: "",
+      salePrice: e.max_sale_price,
+      discountPrice: e.sale_price,
+      option: e.option_list.list.name,
+      imgStatus: "",
+      created_at: e.created_at,
+    });
+  });
+  items.value = list;
+};
+
+getList("1", "5");
 </script>
 
 <style lang="scss" scoped>
