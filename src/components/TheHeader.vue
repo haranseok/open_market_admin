@@ -1,7 +1,7 @@
 <template>
   <v-app-bar color="#F5F5F5">
     <v-app-bar-nav-icon
-      @click="navDrawer.setRail((navDrawer.rail = !navDrawer.rail))"
+      @click="navDrawer.rail = !navDrawer.rail"
     ></v-app-bar-nav-icon>
     <Search class="search-bar" />
   </v-app-bar>

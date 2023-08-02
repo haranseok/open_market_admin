@@ -30,14 +30,23 @@
           <td>{{ DateHelpers.getDate(row.createDate) }}</td>
         </template>
       </BaseTable>
+      <v-btn @click="test">일괄삭제</v-btn>
     </section>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { ref } from "vue";
+import { ref, watchEffect } from "vue";
 import BaseTable from "@/components/tables/BaseTable.vue";
 import { DateHelpers } from "@/helpers/DateHelper";
+import { useButtonStore } from "@/stores/ButtonSrote";
+
+const button = useButtonStore();
+
+const test = () => {
+  button.setButtonClick();
+  console.log(button.setButtonClick());
+};
 const th = ref([
   "전체선택",
   "상품 id",

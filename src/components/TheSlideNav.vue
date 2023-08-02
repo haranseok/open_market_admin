@@ -46,23 +46,6 @@
         value="order"
         @click="router.push('/orders')"
       ></v-list-item>
-
-      <!-- <v-list-group value="order">
-        <template v-slot:activator="{ props }">
-          <v-list-item
-            v-bind="props"
-            title="주문관리"
-            prepend-icon="mdi-cart"
-          ></v-list-item>
-        </template>
-        <v-list-item
-          v-for="([title, value], i) in orders"
-          :key="i"
-          :title="title"
-          :value="value"
-        >
-        </v-list-item>
-      </v-list-group> -->
       <v-list-group value="users">
         <template v-slot:activator="{ props }">
           <v-list-item
@@ -174,10 +157,6 @@ const goods = ref([
   ["상품 등록", "goods_update", "goods?type=update"],
   ["상품 조회", "goods_list", "goods?type=list"],
   ["상품 재고관리", "inventory", "goods?type=inventory"],
-]);
-const orders = ref([
-  ["주문접수", "order_receipt"],
-  ["결제대기", "payment"],
 ]);
 const users = ref([
   ["일반 회원", "general_user", "members?type=general"],

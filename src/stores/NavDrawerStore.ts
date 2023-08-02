@@ -5,12 +5,12 @@ export const useNavDrawerStore = defineStore("NavDrawerStore", {
     drawer: false,
     rail: false,
   }),
-  actions: {
-    setDrawer(lang: boolean) {
-      this.drawer = lang;
-    },
-    setRail(lang: boolean) {
-      this.rail = lang;
-    },
-  },
+  //   actions: {
+  //     setDrawer(lang: boolean) {
+  //       this.drawer = lang;
+  //     },
+  //     setRail(lang: boolean) {
+  //       this.rail = lang;
+  //     },
+  //   },
 });

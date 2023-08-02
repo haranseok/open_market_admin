@@ -35,28 +35,22 @@
       </table>
     </v-card>
     <Pagination :paging="paging" @pageUpdate="pageUpdate" />
-    <v-btn class="update-btn" color="#E53935" @click="btnEvent">
-      {{ btnText }}
-    </v-btn>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { computed, ref, onMounted } from "vue";
+import { computed, ref, onMounted, watchEffect } from "vue";
 import Pagination from "@/components/items/ThePagination.vue";
+import { useButtonStore } from "@/stores/ButtonSrote";
 
 export interface Tables {
   headers: any;
   list: any;
-  btnText: string;
 }
 
-const { headers, list, btnText } = defineProps<Tables>();
-const emits = defineEmits(["btnEvent"]);
+const button = useButtonStore();
 
-const btnEvent = () => {
-  emits("btnEvent", checkedList.value);
-};
+const { headers, list } = defineProps<Tables>();
 
 const paging = ref({});
 
@@ -78,6 +72,13 @@ const allSelected = computed({
     checkedList.value = e ? list : [];
   },
 });
+
+watchEffect(
+  (checkedList.value,
+  () => {
+    button.list = checkedList.value;
+  })
+);
 
 onMounted(() => {
   getList();

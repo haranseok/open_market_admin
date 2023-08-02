@@ -1,8 +1,8 @@
 <template>
   <article>
     <div class="inner-container">
-      <h3 class="kr">{{ props.title }}</h3>
-      <v-breadcrumbs :items="props.items">
+      <h3 class="kr">{{ title }}</h3>
+      <v-breadcrumbs :items="items">
         <template v-slot:title="{ item }">
           {{ item.title.toUpperCase() }}
         </template>
@@ -12,7 +12,12 @@
 </template>
 
 <script lang="ts" setup>
-const props = defineProps(["title", "items"]);
+export interface BreadCrumbs {
+  title: string;
+  items: any;
+}
+
+defineProps<BreadCrumbs>();
 </script>
 
 <style lang="scss" scoped>
