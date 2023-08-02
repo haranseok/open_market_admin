@@ -34,7 +34,7 @@
 import { ref, watchEffect } from "vue";
 import BaseTable from "@/components/tables/BaseTable.vue";
 import { DateHelpers } from "@/helpers/DateHelper";
-import { useButtonStore } from "@/stores/ButtonSrote";
+import { useButtonStore } from "@/stores/ButtonStore";
 
 const button = useButtonStore();
 
@@ -117,3 +117,4 @@ const items = ref([
   }
 }
 </style>
+@/stores/ButtonSrore @/stores/ButtonStore
