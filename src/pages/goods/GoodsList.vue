@@ -2,12 +2,7 @@
   <div class="container">
     <h4>총 &lpar; {{ items.length }} 건 &rpar;</h4>
     <section class="base-table">
-      <BaseTable
-        :headers="th"
-        :list="items"
-        :btn-text="'일괄 삭제'"
-        @btn-event="doDelete"
-      >
+      <BaseTable :headers="th" :list="items">
         <template #list="{ row }">
           <td>{{ row.id }}</td>
           <td>{{ row.store }}</td>
@@ -30,7 +25,7 @@
           <td>{{ DateHelpers.getDate(row.createDate) }}</td>
         </template>
       </BaseTable>
-      <v-btn @click="test">일괄삭제</v-btn>
+      <v-btn class="delete-btn" @click="doDelete" color="error">일괄삭제</v-btn>
     </section>
   </div>
 </template>
@@ -43,10 +38,11 @@ import { useButtonStore } from "@/stores/ButtonSrote";
 
 const button = useButtonStore();
 
-const test = () => {
+const doDelete = () => {
   button.setButtonClick();
   console.log(button.setButtonClick());
 };
+
 const th = ref([
   "전체선택",
   "상품 id",
@@ -109,12 +105,6 @@ const items = ref([
     createDate: "1690416000",
   },
 ]);
-
-const doDelete = (e: any) => {
-  console.log(e);
-};
-
-const doCreate = () => {};
 </script>
 
 <style lang="scss" scoped>

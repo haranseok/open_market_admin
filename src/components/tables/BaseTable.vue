@@ -103,12 +103,4 @@ table {
     width: 50px;
   }
 }
-
-.update-btn {
-  margin: 3% 0;
-  float: right;
-  clear: both;
-  color: #e7e7e7;
-  font-weight: bold;
-}
 </style>

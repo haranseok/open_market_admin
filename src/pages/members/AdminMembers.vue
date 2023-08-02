@@ -1,11 +1,6 @@
 <template>
   <div class="base-table">
-    <BaseTable
-      :headers="th"
-      :list="items"
-      :btn-text="'일괄 삭제'"
-      @btn-event="doDelete"
-    >
+    <BaseTable :headers="th" :list="items">
       <template #list="{ row }">
         <td>{{ row.id }}</td>
         <td>{{ row.name }}</td>
@@ -22,12 +17,22 @@
         <td style="width: 150px">{{ row.createDate }}</td>
       </template>
     </BaseTable>
+    <v-btn class="delete-btn" @click="doDelete" color="error">일괄삭제</v-btn>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { ref } from "vue";
 import BaseTable from "@/components/tables/BaseTable.vue";
+import { useButtonStore } from "@/stores/ButtonSrote";
+
+const button = useButtonStore();
+
+const doDelete = () => {
+  button.setButtonClick();
+  console.log(button.setButtonClick());
+};
+
 const th = ref([
   "전체선택",
   "id",
@@ -58,9 +63,6 @@ const items = ref([
     createDate: "2023-07-17",
   },
 ]);
-const doDelete = (e: any) => {
-  console.log(e);
-};
 </script>
 
 <style lang="scss" scoped>
