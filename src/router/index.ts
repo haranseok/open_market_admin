@@ -6,10 +6,38 @@ const router = createRouter({
   routes: [
     {
       path: "/",
+      redirect: "/main",
+    },
+    {
+      path: "/main",
       components: {
         TheHeader,
         TheSlideNav,
-        default: import("@/pages/home.vue"),
+        default: import("@/pages/Main.vue"),
+      },
+    },
+    {
+      path: "/goods",
+      components: {
+        TheHeader,
+        TheSlideNav,
+        default: import("@/pages/goods/GoodsLayout.vue"),
+      },
+    },
+    {
+      path: "/orders",
+      components: {
+        TheHeader,
+        TheSlideNav,
+        default: import("@/pages/orders/OrderLayout.vue"),
+      },
+    },
+    {
+      path: "/members",
+      components: {
+        TheHeader,
+        TheSlideNav,
+        default: import("@/pages/members/MembersLayout.vue"),
       },
     },
   ],

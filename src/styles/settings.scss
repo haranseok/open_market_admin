@@ -1,9 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap");
-
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap");
 body {
   font-family: "Roboto", sans-serif;
 }
 
+.kr {
+  font-family: "Noto Sans KR", sans-serif;
+}
 /** common **/
 
 table {
@@ -11,7 +14,8 @@ table {
 }
 
 input,
-textarea {
+textarea,
+select {
   outline: none;
 }
 
@@ -24,7 +28,39 @@ ul {
   cursor: pointer;
 }
 
+.bg {
+  background: #fafafa;
+}
+
+.base-table {
+  td {
+    padding: 5px;
+    text-align: center;
+    border: 1px solid #dbdbdb;
+    img {
+      width: 60px;
+      background: rgb(208, 231, 238);
+    }
+  }
+}
+
+.delete-btn {
+  margin: 3% 0;
+  float: right;
+  clear: both;
+  color: #e7e7e7;
+  font-weight: bold;
+}
 /** display **/
+
+.inner-container {
+  width: 95%;
+  margin: 0 auto;
+}
+
+.flex {
+  display: flex;
+}
 
 .jcc {
   display: flex;
@@ -35,6 +71,11 @@ ul {
 .jcsb {
   display: flex;
   justify-content: space-between;
+}
+
+.jcsa {
+  display: flex;
+  justify-content: space-around;
 }
 
 /** popup base bg **/

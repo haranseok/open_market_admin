@@ -1,17 +1,21 @@
 <template>
-  <v-app-bar>
+  <v-app-bar color="#F5F5F5">
     <v-app-bar-nav-icon
-      @click="navDrawer.setDrawer((navDrawer.drawer = !navDrawer.drawer))"
+      @click="navDrawer.rail = !navDrawer.rail"
     ></v-app-bar-nav-icon>
-
-    <v-toolbar-title>Application</v-toolbar-title>
+    <Search class="search-bar" />
   </v-app-bar>
 </template>
 
 <script lang="ts" setup>
-import { useNavDrawerStore } from "@/stores/NavDrawerStore.ts";
-
+import { useNavDrawerStore } from "@/stores/NavDrawerStore";
+import Search from "@/components/items/Search.vue";
 const navDrawer = useNavDrawerStore();
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.search-bar {
+  position: absolute;
+  right: 2%;
+}
+</style>
