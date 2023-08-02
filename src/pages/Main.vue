@@ -53,13 +53,11 @@
 
 <script lang="ts" setup>
 import { ref } from "vue";
-import { useRouter } from "vue-router";
 import TheBreadCrumbs from "@/components/TheBreadCrumbs.vue";
 import LineChart from "@/components/charts/LineChart.vue";
 import CardTable from "@/components/tables/CardTable.vue";
 // import Calendar from "@/components/items/Calendar.vue";
 
-const router = useRouter();
 localStorage.setItem("test", "aa");
 
 const title = ref("메인화면");

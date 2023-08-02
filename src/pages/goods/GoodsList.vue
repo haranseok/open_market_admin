@@ -35,7 +35,7 @@ import { ref, watchEffect } from "vue";
 import BaseTable from "@/components/tables/BaseTable.vue";
 import { DateHelpers } from "@/helpers/DateHelper";
 import { useButtonStore } from "@/stores/ButtonStore";
-
+import { GoodsService } from "@/services/GoodsService";
 const button = useButtonStore();
 
 const doDelete = () => {
@@ -105,6 +105,13 @@ const items = ref([
     createDate: "1690416000",
   },
 ]);
+
+const getList = async (pagNum: string, itemCount: string) => {
+  let res = await GoodsService.getGoodsList(pagNum, itemCount);
+  console.log(res);
+};
+
+getList("1", "5");
 </script>
 
 <style lang="scss" scoped>
@@ -117,4 +124,3 @@ const items = ref([
   }
 }
 </style>
-@/stores/ButtonSrore @/stores/ButtonStore

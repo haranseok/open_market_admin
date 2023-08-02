@@ -1,10 +1,12 @@
 <template>
-  <v-pagination
-    v-model="paging.page"
-    :length="paging.pageView"
-    :total-visible="5"
-    @click="pageUpdate"
-  ></v-pagination>
+  <div>
+    <v-pagination
+      v-model="paging.page"
+      :length="paging.pageView"
+      :total-visible="5"
+      @click="pageUpdate"
+    ></v-pagination>
+  </div>
 </template>
 
 <script lang="ts" setup>
