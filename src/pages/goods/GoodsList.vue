@@ -2,7 +2,7 @@
   <div class="container">
     <h4>총 &lpar; {{ items.length }} 건 &rpar;</h4>
     <section class="base-table">
-      <BaseTable :headers="th" :list="items">
+      <BaseTable :headers="th" :list="items" @doDeleteOne="doDeleteOne">
         <template #list="{ row }">
           <td>{{ row.id }}</td>
           <td>{{ row.store }}</td>
@@ -24,23 +24,44 @@
           <td>{{ DateHelpers.getDate(row.created_at) }}</td>
         </template>
       </BaseTable>
-      <v-btn class="delete-btn" @click="doDelete" color="error">일괄삭제</v-btn>
+      <Pagination :paging="paging" @pageUpdate="pageUpdate" />
     </section>
+    <div class="btn-box">
+      <v-btn class="create-btn" @click="doCreate">상품등록</v-btn>
+      <v-btn class="delete-btn" @click="doDeleteMulti" color="error"
+        >일괄삭제</v-btn
+      >
+    </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { ref } from "vue";
-import BaseTable from "@/components/tables/BaseTable.vue";
+import { ref, onMounted } from "vue";
+import { useRouter } from "vue-router";
 import { DateHelpers } from "@/helpers/DateHelper";
 import { useButtonStore } from "@/stores/ButtonStore";
 import { GoodsService } from "@/services/GoodsService";
+import BaseTable from "@/components/tables/BaseTable.vue";
+import Pagination from "@/components/items/ThePagination.vue";
 
-const button = useButtonStore();
+const router = useRouter();
+const buttonStore = useButtonStore();
+const limit = ref<number>(2);
+const page = ref<number>(1);
+const paging = ref<object>({});
+onMounted(() => {
+  getList(page.value, limit.value);
+});
 
-const doDelete = () => {
-  button.setButtonClick();
-  console.log(button.setButtonClick());
+const doDeleteMulti = () => {
+  buttonStore.list;
+  console.log(buttonStore.list);
+};
+const doDeleteOne = (e: object) => {
+  console.log(e);
+};
+const doCreate = () => {
+  router.push("/goods/create");
 };
 
 const th = ref([
@@ -60,10 +81,12 @@ const th = ref([
   "삭제",
 ]);
 
-const items = ref({});
+const items = ref([]);
 
-const getList = async (pageNum: string, itemCount: string) => {
+const getList = async (pageNum: number, itemCount: number) => {
   let res = await GoodsService.getGoodsList(pageNum, itemCount);
+  let pageSize = Math.ceil(res.count / limit.value);
+  paging.value = { pageView: pageSize };
   let list: any = [];
   res.list.forEach((e: any) => {
     list.push({
@@ -76,7 +99,7 @@ const getList = async (pageNum: string, itemCount: string) => {
       supplyPrice: "",
       salePrice: e.max_sale_price,
       discountPrice: e.sale_price,
-      option: e.option_list.list.name,
+      option: e.option_list.list[0].name,
       imgStatus: "",
       created_at: e.created_at,
     });
@@ -84,7 +107,11 @@ const getList = async (pageNum: string, itemCount: string) => {
   items.value = list;
 };
 
-getList("1", "5");
+const pageUpdate = (paging: any) => {
+  page.value = paging.page;
+  items.value = [];
+  getList(page.value, limit.value);
+};
 </script>
 
 <style lang="scss" scoped>
@@ -94,6 +121,14 @@ getList("1", "5");
     margin-bottom: 10px;
     text-align: right;
     color: #7c7c7c;
+  }
+}
+
+.btn-box {
+  display: flex;
+  justify-content: end;
+  .create-btn {
+    margin: 3% 15px;
   }
 }
 </style>

@@ -10,11 +10,6 @@
             @changeInput="getName"
           />
           <AtomInput
-            :type="'text'"
-            :placeholder="'상품코드'"
-            @changeInput="getCode"
-          />
-          <AtomInput
             :type="'date'"
             :dataPlaceholder="'시작날짜 YYYY-MM-DD'"
             @changeInput="getStartDate"
@@ -34,11 +29,13 @@
 
 <script lang="ts" setup>
 import { ref, watchEffect } from "vue";
+import { useRoute } from "vue-router";
 import TheBreadCrumbs from "@/components/TheBreadCrumbs.vue";
 import AtomInput from "@/components/items/AtomInput.vue";
+
+const route = useRoute();
 const isSearch = ref(true);
 const goodsName = ref("");
-const goodsCode = ref("");
 const startData = ref("");
 const endData = ref("");
 const links = ref([
@@ -50,14 +47,16 @@ const links = ref([
   {
     title: "상품리스트",
     disabled: true,
-    href: "/goods?list",
+    href: "/goods/list",
+  },
+  {
+    title: "상품등록",
+    disabled: true,
+    href: "/goods/create",
   },
 ]);
 const getName = (e: string) => {
   goodsName.value = e;
-};
-const getCode = (e: string) => {
-  goodsCode.value = e;
 };
 const getStartDate = (e: string) => {
   startData.value = e;
@@ -68,20 +67,19 @@ const getEndDate = (e: string) => {
 const doSearch = () => {
   let searchData = {
     name: goodsName.value,
-    code: goodsCode.value,
     start: startData.value,
     end: endData.value,
   };
 };
 
-const doGoodsCreate = () => {};
-const linksTypes = (title: string, href: string, component: any) => {
-  links.value[1] = {
-    title: title,
-    disabled: true,
-    href: `/goods?type=${href}`,
-  };
-};
+watchEffect(
+  (route.path,
+  () => {
+    if (route.path === "/goods/create") {
+      console.log(".");
+    }
+  })
+);
 </script>
 
 <style lang="scss" scoped>

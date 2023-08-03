@@ -114,19 +114,21 @@
   </article>
   <div class="btn-container">
     <v-btn @click="gooodsUpload">등록</v-btn>
-    <v-btn color="error" @click="doCancel">취소</v-btn>
+    <v-btn color="error" @click="router.go(-1)">취소</v-btn>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { ref, watchEffect } from "vue";
+import { useRouter } from "vue-router";
 import ImgUpload from "@/components/items/ImgUploadInput.vue";
 
+const router = useRouter();
 const imgShow = ref(false);
 const labelShow = ref(true);
 const imgSrc = ref();
 const imgAlt = ref("");
-const files = ref("");
+const files = ref();
 
 const formData = ref({
   goodsCode: "",

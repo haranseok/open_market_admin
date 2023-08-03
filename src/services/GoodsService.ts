@@ -6,8 +6,8 @@ const url = import.meta.env.VITE_API_URL;
 const header = {};
 export class GoodsService {
   static async getGoodsList(
-    pageNum: string,
-    itemCount: string
+    pageNum: number,
+    itemCount: number
   ): Promise<GoodsInterface.ResponseListSchema> {
     const res = await HttpCommunicator.exec(
       url + `/goods_list?p=${pageNum}&itemCount=${itemCount}`,

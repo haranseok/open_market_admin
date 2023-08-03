@@ -28,6 +28,10 @@ const router = createRouter({
           path: "list",
           component: import("@/pages/goods/GoodsList.vue"),
         },
+        {
+          path: "create",
+          component: import("@/pages/goods/GoodsCreate.vue"),
+        },
       ],
     },
     {
