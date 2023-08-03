@@ -23,23 +23,18 @@
         value="home"
         @click="router.push('/main')"
       ></v-list-item>
-      <v-list-group value="goods">
-        <template v-slot:activator="{ props }">
-          <v-list-item
-            v-bind="props"
-            title="상품관리"
-            prepend-icon="mdi-gift"
-          ></v-list-item>
-        </template>
-        <v-list-item
-          v-for="([title, value, link], i) in goods"
-          :key="i"
-          :title="title"
-          :value="value"
-          @click="routerLink(link)"
-        >
-        </v-list-item>
-      </v-list-group>
+      <v-list-item
+        title="상품관리"
+        prepend-icon="mdi-gift"
+        value="goods"
+        @click="router.push('/goods/list')"
+      ></v-list-item>
+      <v-list-item
+        title="재고관리"
+        prepend-icon="mdi-archive-outline"
+        value="inventory"
+        @click="router.push('/inventory')"
+      ></v-list-item>
       <v-list-item
         title="주문관리"
         prepend-icon="mdi-cart"
@@ -153,11 +148,11 @@ import { useRouter } from "vue-router";
 import { useNavDrawerStore } from "@/stores/NavDrawerStore";
 const router = useRouter();
 const navDrawerStore = useNavDrawerStore();
-const goods = ref([
-  ["상품 등록", "goods_update", "goods?type=update"],
-  ["상품 조회", "goods_list", "goods?type=list"],
-  ["상품 재고관리", "inventory", "goods?type=inventory"],
-]);
+// const goods = ref([
+//   ["상품 등록", "goods_update", "goods?type=update"],
+//   ["상품 조회", "goods_list", "goods?type=list"],
+//   ["상품 재고관리", "inventory", "goods?type=inventory"],
+// ]);
 const users = ref([
   ["일반 회원", "general_user", "members?type=general"],
   ["판매자 회원", "seller_user", "members?type=sales"],

@@ -1,34 +1,50 @@
 <template>
-  <div class="container">
-    <section class="base-table">
-      <BaseTable :headers="th" :list="items" class="table">
-        <template #list="{ row }">
-          <td>{{ row.goodsName }}</td>
-          <td>
-            <img
-              src="@/assets/images/exclude.png"
-              alt=""
-              v-if="row.img === ''"
-            />
-            <img :src="row.img" alt="" v-else />
-          </td>
-          <td class="num">{{ row.storage }}</td>
-          <td class="num">{{ row.oders }}</td>
-          <td class="oders"><input type="text" /></td>
-          <td class="checkbox"><input type="checkbox" /></td>
-        </template>
-      </BaseTable>
-    </section>
-    <v-btn class="delete-btn" @click="doDelete" color="error">일괄삭제</v-btn>
-  </div>
+  <v-main class="bg">
+    <TheBreadCrumbs :title="'재고관리'" :items="links" />
+    <article class="inner-container">
+      <section class="base-table">
+        <BaseTable :headers="th" :list="items" class="table">
+          <template #list="{ row }">
+            <td>{{ row.goodsName }}</td>
+            <td>
+              <img
+                src="@/assets/images/exclude.png"
+                alt=""
+                v-if="row.img === ''"
+              />
+              <img :src="row.img" alt="" v-else />
+            </td>
+            <td class="num">{{ row.storage }}</td>
+            <td class="num">{{ row.oders }}</td>
+            <td class="oders"><input type="text" /></td>
+            <td class="checkbox"><input type="checkbox" /></td>
+          </template>
+        </BaseTable>
+      </section>
+      <v-btn class="delete-btn" @click="doDelete" color="error">일괄삭제</v-btn>
+    </article>
+  </v-main>
 </template>
 
 <script lang="ts" setup>
 import { ref } from "vue";
-import BaseTable from "@/components/tables/BaseTable.vue";
 import { useButtonStore } from "@/stores/ButtonStore";
+import BaseTable from "@/components/tables/BaseTable.vue";
+import TheBreadCrumbs from "@/components/TheBreadCrumbs.vue";
 
 const button = useButtonStore();
+const links = ref([
+  {
+    title: "home",
+    disabled: false,
+    href: "main",
+  },
+  {
+    title: "상품리스트",
+    disabled: true,
+    href: "/goods?list",
+  },
+]);
 
 const doDelete = () => {
   button.setButtonClick();
@@ -74,8 +90,8 @@ const doUpdate = (e: any) => {
 </script>
 
 <style lang="scss" scoped>
-.container {
-  margin: 2% 0;
+.inner-container {
+  padding: 1.5% 0;
   .base-table {
     .oders {
       width: 100px;
@@ -95,4 +111,3 @@ const doUpdate = (e: any) => {
   }
 }
 </style>
-@/stores/ButtonSrore @/stores/ButtonStore

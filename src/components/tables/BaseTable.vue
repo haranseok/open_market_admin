@@ -6,11 +6,8 @@
           <tr>
             <th v-for="(th, i) in headers" :key="i">
               <div v-if="i === 0">
-                <input type="checkbox" id="all" v-model="allSelected" /><label
-                  for="all"
-                  style="display: none"
-                  >전체선택</label
-                >
+                <input type="checkbox" id="all" v-model="allSelected" />
+                <label for="all" style="display: none">전체선택</label>
               </div>
               <div v-else>{{ th }}</div>
             </th>
@@ -104,4 +101,3 @@ table {
   }
 }
 </style>
-@/stores/ButtonSrore @/stores/ButtonStore

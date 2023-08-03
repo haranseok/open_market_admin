@@ -23,6 +23,20 @@ const router = createRouter({
         TheSlideNav,
         default: import("@/pages/goods/GoodsLayout.vue"),
       },
+      children: [
+        {
+          path: "list",
+          component: import("@/pages/goods/GoodsList.vue"),
+        },
+      ],
+    },
+    {
+      path: "/inventory",
+      components: {
+        TheHeader,
+        TheSlideNav,
+        default: import("@/pages/goods/GoodsInventory.vue"),
+      },
     },
     {
       path: "/orders",

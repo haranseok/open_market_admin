@@ -27,23 +27,15 @@
         </div>
         <v-btn color="rgb(40, 53, 147)" @click="doSearch">검색</v-btn>
       </div>
-      <section>
-        <component :is="goodsPage"></component>
-      </section>
+      <router-view></router-view>
     </article>
   </v-main>
 </template>
 
 <script lang="ts" setup>
 import { ref, watchEffect } from "vue";
-import { useRoute } from "vue-router";
 import TheBreadCrumbs from "@/components/TheBreadCrumbs.vue";
 import AtomInput from "@/components/items/AtomInput.vue";
-import GoodsList from "./GoodsList.vue";
-import GoodsInventory from "./GoodsInventory.vue";
-import GoodsUpdate from "./GoodsUpdate.vue";
-const route = useRoute();
-const goodsPage = ref(GoodsList);
 const isSearch = ref(true);
 const goodsName = ref("");
 const goodsCode = ref("");
@@ -89,23 +81,7 @@ const linksTypes = (title: string, href: string, component: any) => {
     disabled: true,
     href: `/goods?type=${href}`,
   };
-  goodsPage.value = component;
 };
-
-watchEffect(
-  (route.query,
-  () => {
-    let type = route.query.type;
-    if (type === "list") {
-      linksTypes("상품 리스트", "list", GoodsList);
-    } else if (type === "inventory") {
-      linksTypes("상품 재고관리", "inventory", GoodsInventory);
-    } else {
-      linksTypes("상품 등록", "update", GoodsUpdate);
-      isSearch.value = false;
-    }
-  })
-);
 </script>
 
 <style lang="scss" scoped>
