@@ -14,7 +14,6 @@
             />
             <img :src="row.img" alt="" v-else />
           </td>
-          <td>{{ row.name }}</td>
           <td>{{ row.goodsName }}</td>
           <td>{{ row.status }}</td>
           <td>{{ row.supplyPrice }}</td>
@@ -31,11 +30,12 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, watchEffect } from "vue";
+import { ref } from "vue";
 import BaseTable from "@/components/tables/BaseTable.vue";
 import { DateHelpers } from "@/helpers/DateHelper";
 import { useButtonStore } from "@/stores/ButtonStore";
 import { GoodsService } from "@/services/GoodsService";
+
 const button = useButtonStore();
 
 const doDelete = () => {
@@ -48,7 +48,6 @@ const th = ref([
   "상품 id",
   "store",
   "대표 이미지",
-  "판매자 명",
   "상품 명",
   "상태",
   "공급가",
