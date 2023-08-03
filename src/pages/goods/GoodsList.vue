@@ -1,6 +1,26 @@
 <template>
   <div class="container">
-    <h4>총 &lpar; {{ items.length }} 건 &rpar;</h4>
+    <div class="search-wrap jcsb">
+      <div class="inner flex">
+        <AtomInput
+          :type="'text'"
+          :placeholder="'상품명'"
+          @changeInput="getName"
+        />
+        <AtomInput
+          :type="'date'"
+          :dataPlaceholder="'시작날짜 YYYY-MM-DD'"
+          @changeInput="getStartDate"
+        />
+        <AtomInput
+          :type="'date'"
+          :dataPlaceholder="'종료날짜 YYYY-MM-DD'"
+          @changeInput="getEndDate"
+        />
+      </div>
+      <v-btn color="rgb(40, 53, 147)" @click="doSearch">검색</v-btn>
+    </div>
+    <h4>총 &lpar; {{ totalData }} 건 &rpar;</h4>
     <section class="base-table">
       <BaseTable :headers="th" :list="items" @doDeleteOne="doDeleteOne">
         <template #list="{ row }">
@@ -24,8 +44,8 @@
           <td>{{ DateHelpers.getDate(row.created_at) }}</td>
         </template>
       </BaseTable>
-      <Pagination :paging="paging" @pageUpdate="pageUpdate" />
     </section>
+    <Pagination :paging="paging" @pageUpdate="pageUpdate" />
     <div class="btn-box">
       <v-btn class="create-btn" @click="doCreate">상품등록</v-btn>
       <v-btn class="delete-btn" @click="doDeleteMulti" color="error"
@@ -43,12 +63,20 @@ import { useButtonStore } from "@/stores/ButtonStore";
 import { GoodsService } from "@/services/GoodsService";
 import BaseTable from "@/components/tables/BaseTable.vue";
 import Pagination from "@/components/items/ThePagination.vue";
+import AtomInput from "@/components/items/AtomInput.vue";
 
 const router = useRouter();
 const buttonStore = useButtonStore();
-const limit = ref<number>(2);
+
+const items = ref([]);
+const totalData = ref<number>(0);
+const limit = ref<any>("10");
 const page = ref<number>(1);
 const paging = ref<object>({});
+const goodsName = ref("");
+const startData = ref("");
+const endData = ref("");
+
 onMounted(() => {
   getList(page.value, limit.value);
 });
@@ -85,12 +113,10 @@ const th = ref([
   "삭제",
 ]);
 
-const items = ref([]);
-
-const getList = async (pageNum: number, itemCount: number) => {
+const getList = async (pageNum: number, itemCount: string) => {
   let res = await GoodsService.getGoodsList(pageNum, itemCount);
-  let pageSize = Math.ceil(res.count / limit.value);
-  paging.value = { pageView: pageSize };
+  totalData.value = res.count;
+  setPaging(res.count);
   let list: any = [];
   res.list.forEach((e: any) => {
     list.push({
@@ -111,10 +137,29 @@ const getList = async (pageNum: number, itemCount: number) => {
   items.value = list;
 };
 
+const setPaging = (count: number) => {
+  let pageSize = Math.ceil(count / limit.value);
+  paging.value = { pageView: pageSize };
+};
+
 const pageUpdate = (paging: any) => {
   page.value = paging.page;
   items.value = [];
   getList(page.value, limit.value);
+};
+
+const getName = (e: string) => {
+  goodsName.value = e;
+};
+const getStartDate = (e: string) => {
+  startData.value = e;
+};
+const getEndDate = (e: string) => {
+  endData.value = e;
+};
+
+const doSearch = () => {
+  getList(page.value, `${limit.value}&name=${goodsName.value}`);
 };
 </script>
 
@@ -128,11 +173,32 @@ const pageUpdate = (paging: any) => {
   }
 }
 
+.base-table {
+  margin-bottom: 2%;
+}
+
 .btn-box {
   display: flex;
   justify-content: end;
   .create-btn {
     margin: 3% 15px;
+  }
+}
+
+.search-wrap {
+  align-items: center;
+  margin-bottom: 2.5%;
+  padding: 0.5%;
+  border-radius: 5px;
+  background: rgba(244, 246, 247, 0.699);
+  box-shadow: 0px 0px 8px 0 rgba(0, 0, 0, 0.1);
+  .inner {
+    align-items: center;
+  }
+  .v-btn {
+    width: 90px;
+    margin-right: 10px;
+    color: #e7e7e7;
   }
 }
 </style>
