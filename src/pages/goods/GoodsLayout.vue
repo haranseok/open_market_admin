@@ -49,11 +49,6 @@ const links = ref([
     disabled: true,
     href: "/goods/list",
   },
-  {
-    title: "상품등록",
-    disabled: true,
-    href: "/goods/create",
-  },
 ]);
 const getName = (e: string) => {
   goodsName.value = e;
@@ -76,7 +71,18 @@ watchEffect(
   (route.path,
   () => {
     if (route.path === "/goods/create") {
-      console.log(".");
+      isSearch.value = false;
+      links.value[1].disabled = false;
+      links.value.push({
+        title: "상품등록",
+        disabled: true,
+        href: "/goods/create",
+      });
+    } else if (route.path === "/goods/list") {
+      links.value[1].disabled = true;
+      if (links.value.length > 2) {
+        links.value.pop();
+      }
     }
   })
 );

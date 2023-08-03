@@ -114,16 +114,18 @@
   </article>
   <div class="btn-container">
     <v-btn @click="gooodsUpload">등록</v-btn>
-    <v-btn color="error" @click="router.go(-1)">취소</v-btn>
+    <v-btn color="error" @click="doWriteCancel">취소</v-btn>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { ref, watchEffect } from "vue";
 import { useRouter } from "vue-router";
+import { useButtonStore } from "@/stores/ButtonStore";
 import ImgUpload from "@/components/items/ImgUploadInput.vue";
 
 const router = useRouter();
+const buttonStore = useButtonStore();
 const imgShow = ref(false);
 const labelShow = ref(true);
 const imgSrc = ref();
@@ -184,7 +186,7 @@ const gooodsUpload = () => {
   console.log(formData.value);
 };
 
-const doCancel = () => {
+const doWriteCancel = () => {
   formData.value = {
     goodsCode: "",
     goodsName: "",
@@ -201,6 +203,8 @@ const doCancel = () => {
     file: "",
     detail: "",
   };
+  buttonStore.backBtn = true;
+  router.go(-1);
 };
 </script>
 
