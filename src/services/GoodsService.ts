@@ -17,4 +17,18 @@ export class GoodsService {
     );
     return res.body;
   }
+
+  static async doDeleteOne(id: number): Promise<AtomInterface.ResponseBase> {
+    const deleteHeaders = {
+      headers: { "Content-Type": "multipart/form-data" },
+    };
+    const res = await HttpCommunicator.exec(
+      url + `/v1/goods/do_delete`,
+      "post",
+      { id: id },
+      deleteHeaders
+    );
+
+    return res;
+  }
 }

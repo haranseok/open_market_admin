@@ -57,8 +57,12 @@ const doDeleteMulti = () => {
   buttonStore.list;
   console.log(buttonStore.list);
 };
-const doDeleteOne = (e: object) => {
-  console.log(e);
+const doDeleteOne = async (e: any) => {
+  let res = await GoodsService.doDeleteOne(e.id);
+  if (res.code === 200) {
+    items.value = [];
+    getList(page.value, limit.value);
+  }
 };
 const doCreate = () => {
   router.push("/goods/create");
