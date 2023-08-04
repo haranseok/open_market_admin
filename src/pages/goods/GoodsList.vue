@@ -61,6 +61,7 @@ import { useRouter } from "vue-router";
 import { DateHelpers } from "@/helpers/DateHelper";
 import { useButtonStore } from "@/stores/ButtonStore";
 import { GoodsService } from "@/services/GoodsService";
+import { Calculator } from "@/assets/common/Calculator.ts";
 import BaseTable from "@/components/tables/BaseTable.vue";
 import Pagination from "@/components/items/ThePagination.vue";
 import AtomInput from "@/components/items/AtomInput.vue";
@@ -127,7 +128,7 @@ const getList = async (pageNum: number, itemCount: string) => {
       goodsName: e.name,
       status: e.status === "1" ? "노출" : "비노출",
       supplyPrice: "",
-      salePrice: e.max_sale_price,
+      salePrice: Calculator.setPriceComma(e.max_sale_price),
       discountPrice: e.sale_price,
       option: e.option_list.list[0].name,
       imgStatus: "",
